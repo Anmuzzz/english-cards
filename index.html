@@ -1,0 +1,3011 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+<title>Английские флеш-карточки · MD3</title>
+<style>
+  :root{
+    color-scheme:light;
+    --primary:#6750A4; --on-primary:#FFFFFF;
+    --primary-container:#EADDFF; --on-primary-container:#21005D;
+    --secondary:#625B71; --on-secondary:#FFFFFF;
+    --secondary-container:#E8DEF8; --on-secondary-container:#1D192B;
+    --tertiary:#7D5260; --tertiary-container:#FFD8E4; --on-tertiary-container:#31111D;
+    --error:#B3261E; --on-error:#FFFFFF; --error-container:#F9DEDC; --on-error-container:#410E0B;
+    --success:#386A20; --on-success:#FFFFFF; --success-container:#C6F0B4; --on-success-container:#0A2100;
+    --warning-container:#FFE0A3; --on-warning-container:#4A3200;
+    --surface:#FEF7FF; --surface-dim:#DED8E1;
+    --surface-lowest:#FFFFFF; --surface-low:#F7F2FA; --surface-container:#F3EDF7;
+    --surface-high:#ECE6F0; --surface-highest:#E6E0E9;
+    --surface-container-low:var(--surface-low); --surface-container-high:var(--surface-high);
+    --surface-container-highest:var(--surface-highest);
+    --on-surface:#1D1B20; --on-surface-variant:#49454F;
+    --outline:#79747E; --outline-variant:#CAC4D0;
+    --inverse-surface:#322F35; --inverse-on-surface:#F5EFF7;
+    --shadow-1:0 1px 2px rgba(0,0,0,.16),0 1px 3px 1px rgba(0,0,0,.08);
+    --shadow-2:0 1px 2px rgba(0,0,0,.16),0 2px 6px 2px rgba(0,0,0,.10);
+    --shadow-3:0 4px 8px 3px rgba(0,0,0,.12),0 1px 3px rgba(0,0,0,.18);
+    --r-xs:8px; --r-sm:12px; --r-md:16px; --r-lg:20px; --r-xl:28px; --r-full:999px;
+  }
+  html[data-theme="dark"]{
+    color-scheme:dark;
+    --primary:#D0BCFF; --on-primary:#381E72;
+    --primary-container:#4F378B; --on-primary-container:#EADDFF;
+    --secondary:#CCC2DC; --on-secondary:#332D41;
+    --secondary-container:#4A4458; --on-secondary-container:#E8DEF8;
+    --tertiary:#EFB8C8; --tertiary-container:#633B48; --on-tertiary-container:#FFD8E4;
+    --error:#F2B8B5; --on-error:#601410; --error-container:#8C1D18; --on-error-container:#F9DEDC;
+    --success:#A6D98D; --on-success:#0E2B00; --success-container:#1F3B16; --on-success-container:#C6F0B4;
+    --warning-container:#4A3200; --on-warning-container:#FFE0A3;
+    --surface:#141218; --surface-dim:#141218;
+    --surface-lowest:#0F0D13; --surface-low:#1D1B20; --surface-container:#211F26;
+    --surface-high:#2B2930; --surface-highest:#36343B;
+    --surface-container-low:var(--surface-low); --surface-container-high:var(--surface-high);
+    --surface-container-highest:var(--surface-highest);
+    --on-surface:#E6E0E9; --on-surface-variant:#CAC4D0;
+    --outline:#938F99; --outline-variant:#49454F;
+    --inverse-surface:#E6E0E9; --inverse-on-surface:#313033;
+    --shadow-1:0 1px 2px rgba(0,0,0,.5),0 1px 3px 1px rgba(0,0,0,.3);
+    --shadow-2:0 2px 6px 2px rgba(0,0,0,.4),0 1px 2px rgba(0,0,0,.5);
+    --shadow-3:0 4px 12px 3px rgba(0,0,0,.5),0 1px 3px rgba(0,0,0,.6);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  [hidden]{display:none!important}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    font-family:Roboto,"Segoe UI",system-ui,-apple-system,"Helvetica Neue",Arial,sans-serif;
+    background:
+      radial-gradient(1100px 520px at 8% -12%, color-mix(in srgb, var(--primary) 14%, transparent), transparent 65%),
+      radial-gradient(900px 480px at 105% 0%, color-mix(in srgb, var(--tertiary) 12%, transparent), transparent 60%),
+      var(--surface);
+    background-attachment:fixed;
+    color:var(--on-surface);
+    min-height:100vh;
+    line-height:1.45;
+    -webkit-font-smoothing:antialiased;
+  }
+  button,input{font:inherit;color:inherit}
+  button{background:none;border:none;cursor:pointer}
+  .icon{width:20px;height:20px;flex:none;fill:currentColor}
+  .icon-sm{width:18px;height:18px;flex:none;fill:currentColor}
+  :focus-visible{outline:3px solid var(--primary);outline-offset:2px;border-radius:6px}
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+
+  /* App bar */
+  .app-bar{position:sticky;top:0;z-index:40;background:color-mix(in srgb,var(--surface) 86%,transparent);backdrop-filter:blur(14px);border-bottom:1px solid color-mix(in srgb,var(--outline-variant) 55%,transparent)}
+  .app-bar-inner{width:min(100% - 32px,880px);margin:0 auto;min-height:64px;display:flex;align-items:center;gap:12px}
+  .brand{display:flex;align-items:center;gap:12px;min-width:0}
+  .brand-mark{width:40px;height:40px;border-radius:14px;display:grid;place-items:center;background:linear-gradient(145deg,var(--primary),color-mix(in srgb,var(--primary) 55%,var(--tertiary)));color:var(--on-primary);box-shadow:var(--shadow-1)}
+  .brand-mark .icon{width:22px;height:22px}
+  .brand h1{font-size:1.06rem;font-weight:600;letter-spacing:.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .brand p{font-size:.72rem;color:var(--on-surface-variant);letter-spacing:.02em}
+  .app-bar-actions{margin-left:auto;display:flex;gap:6px}
+  .icon-btn{position:relative;overflow:hidden;width:44px;height:44px;border-radius:var(--r-full);display:grid;place-items:center;color:var(--on-surface-variant);transition:background .18s,color .18s}
+  .icon-btn:hover{background:color-mix(in srgb,var(--on-surface) 8%,transparent);color:var(--on-surface)}
+  .icon-btn .icon{width:22px;height:22px}
+
+  .app{width:min(100% - 32px,880px);margin:0 auto;padding:18px 0 56px;display:flex;flex-direction:column;gap:18px}
+
+  /* Tabs */
+  .tabs{display:flex;gap:4px;padding:5px;background:var(--surface-container);border-radius:var(--r-full);overflow-x:auto;scrollbar-width:none;box-shadow:var(--shadow-1)}
+  .tabs::-webkit-scrollbar{display:none}
+  .tab{position:relative;overflow:hidden;flex:1 0 auto;display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:0 16px;border-radius:var(--r-full);color:var(--on-surface-variant);font-size:.9rem;font-weight:500;white-space:nowrap;transition:background .2s,color .2s,box-shadow .2s}
+  .tab .icon{width:19px;height:19px}
+  .tab:hover{background:color-mix(in srgb,var(--on-surface) 7%,transparent)}
+  .tab[aria-selected="true"]{background:var(--primary);color:var(--on-primary);box-shadow:var(--shadow-1)}
+  .view{display:flex;flex-direction:column;gap:16px;animation:viewIn .28s ease}
+  .view[hidden]{display:none}
+  @keyframes viewIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+  /* Level segmented */
+  .level-seg{display:flex;gap:4px;padding:4px;background:var(--surface-container);border-radius:var(--r-full);overflow-x:auto;scrollbar-width:none;width:100%}
+  .level-seg::-webkit-scrollbar{display:none}
+  .seg-btn{position:relative;overflow:hidden;flex:1 0 auto;min-width:56px;min-height:40px;padding:0 14px;border-radius:var(--r-full);font-size:.86rem;font-weight:600;letter-spacing:.02em;color:var(--on-surface-variant);border:1px solid transparent;transition:background .18s,color .18s}
+  .seg-btn:hover{background:color-mix(in srgb,var(--on-surface) 7%,transparent)}
+  .seg-btn[aria-pressed="true"]{background:var(--secondary-container);color:var(--on-secondary-container);box-shadow:var(--shadow-1)}
+  .seg-btn small{display:block;font-size:.6rem;font-weight:400;letter-spacing:0;opacity:.75;line-height:1}
+
+  /* Stats */
+  .stats-row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+  .chip{display:inline-flex;align-items:center;gap:6px;padding:7px 13px;border-radius:var(--r-full);background:var(--surface-container);color:var(--on-surface-variant);font-size:.8rem;white-space:nowrap}
+  .chip b{color:var(--on-surface);font-weight:600}
+  .chip .icon{width:16px;height:16px}
+  .chip.accent{background:var(--primary-container);color:var(--on-primary-container)}
+  .chip.accent b{color:inherit}
+  .chip.good{background:var(--success-container);color:var(--on-success-container)}
+
+  .progress{height:8px;border-radius:var(--r-full);background:var(--surface-container-high);overflow:hidden}
+  .progress>i{display:block;height:100%;width:0;border-radius:inherit;background:linear-gradient(90deg,var(--primary),color-mix(in srgb,var(--primary) 60%,var(--tertiary)));transition:width .4s cubic-bezier(.2,.8,.2,1)}
+
+  /* Flashcard */
+  .stage{perspective:1500px;display:grid;place-items:center;min-height:310px;padding:4px 0}
+  .flashcard{width:100%;max-width:540px;height:290px;position:relative;cursor:pointer;border-radius:var(--r-xl);user-select:none;-webkit-tap-highlight-color:transparent}
+  .flashcard.enter{animation:cardIn .3s cubic-bezier(.2,.8,.2,1)}
+  .flashcard.leaving{animation:cardOut .18s ease forwards;pointer-events:none}
+  @keyframes cardIn{from{opacity:0;transform:translateY(14px) scale(.97)}to{opacity:1;transform:none}}
+  @keyframes cardOut{to{opacity:0;transform:translateY(-12px) scale(.97)}}
+  .fc-inner{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform .52s cubic-bezier(.2,.7,.25,1)}
+  .flashcard.is-flipped .fc-inner{transform:rotateY(180deg)}
+  .face{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:26px 24px;border-radius:var(--r-xl);backface-visibility:hidden;-webkit-backface-visibility:hidden;text-align:center;box-shadow:var(--shadow-2);overflow:hidden}
+  .face.front{background:linear-gradient(155deg,var(--surface-lowest),var(--surface-container) 60%,color-mix(in srgb,var(--primary-container) 55%,var(--surface-container)));border:1px solid var(--outline-variant);color:var(--on-surface)}
+  .face.back{transform:rotateY(180deg);background:linear-gradient(155deg,var(--primary),color-mix(in srgb,var(--primary) 55%,var(--tertiary)));color:var(--on-primary)}
+  .face.back .face-tag,.face.back .hint{opacity:.78}
+  .face-tag{font-size:.7rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;opacity:.6}
+  .word{font-size:clamp(1.65rem,5.2vw,2.55rem);font-weight:600;line-height:1.15;letter-spacing:-.01em;word-break:break-word;max-width:100%}
+  .word-sub{font-size:.95rem;opacity:.72;font-weight:400}
+  .hint{position:absolute;bottom:16px;left:0;right:0;font-size:.72rem;opacity:.58;letter-spacing:.01em}
+  .speak{position:absolute;top:14px;right:14px;width:42px;height:42px;border-radius:var(--r-full);display:grid;place-items:center;background:color-mix(in srgb,var(--on-surface) 7%,transparent);color:inherit;transition:background .18s,transform .18s}
+  .speak:hover{background:color-mix(in srgb,var(--on-surface) 14%,transparent)}
+  .speak:active{transform:scale(.92)}
+  .face.back .speak{background:color-mix(in srgb,var(--on-primary) 16%,transparent)}
+
+  .controls{display:grid;grid-template-columns:1fr 1fr;gap:12px;width:100%;max-width:540px;margin:0 auto}
+  .btn{position:relative;overflow:hidden;display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:52px;padding:0 24px;border-radius:var(--r-full);font-size:.98rem;font-weight:600;letter-spacing:.01em;transition:box-shadow .2s,transform .12s,background .2s,color .2s;box-shadow:var(--shadow-1);text-align:center}
+  .btn::after{content:"";position:absolute;inset:0;background:currentColor;opacity:0;transition:opacity .16s;pointer-events:none}
+  .btn:hover::after{opacity:.08}
+  .btn:active{transform:scale(.975);box-shadow:none}
+  .btn:disabled{opacity:.4;cursor:not-allowed;box-shadow:none;transform:none}
+  .btn-filled{background:var(--primary);color:var(--on-primary)}
+  .btn-success{background:var(--success);color:var(--on-success)}
+  .btn-danger{background:var(--error);color:var(--on-error)}
+  .btn-tonal{background:var(--secondary-container);color:var(--on-secondary-container);box-shadow:none}
+  .btn-outlined{background:transparent;color:var(--primary);border:1px solid var(--outline);box-shadow:none}
+  .btn-text{background:transparent;color:var(--primary);box-shadow:none;min-height:44px;padding:0 16px;font-weight:500}
+  .btn-small{min-height:44px;font-size:.86rem;padding:0 18px}
+  .btn kbd{margin-left:2px}
+  kbd{display:inline-flex;align-items:center;justify-content:center;min-width:20px;height:20px;padding:0 5px;border-radius:6px;background:color-mix(in srgb,currentColor 16%,transparent);font:500 .68rem/1 Roboto,system-ui,sans-serif;opacity:.9}
+  .kbd-hint{text-align:center;font-size:.75rem;color:var(--on-surface-variant);opacity:.85}
+  .kbd-hint kbd{margin:0 2px;color:var(--on-surface-variant)}
+
+  /* Done panel */
+  .panel{background:var(--surface-container);border-radius:var(--r-xl);padding:28px 22px;display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center;box-shadow:var(--shadow-1);animation:viewIn .3s ease}
+  .panel-icon{width:64px;height:64px;border-radius:var(--r-full);display:grid;place-items:center;background:var(--primary-container);color:var(--on-primary-container);margin-bottom:2px}
+  .panel-icon .icon{width:32px;height:32px}
+  .panel h2{font-size:1.3rem;font-weight:600}
+  .panel p{font-size:.9rem;color:var(--on-surface-variant);max-width:420px}
+  .panel .stats-row{justify-content:center;margin-top:2px}
+  .panel .actions{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:8px}
+  .panel .actions .btn{min-height:46px}
+
+  /* Test */
+  .test-card{background:var(--surface-container);border-radius:var(--r-xl);padding:22px;display:flex;flex-direction:column;gap:16px;box-shadow:var(--shadow-1);animation:viewIn .28s ease}
+  .test-head{display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:.82rem;color:var(--on-surface-variant)}
+  .test-question{font-size:clamp(1.25rem,4vw,1.6rem);font-weight:600;text-align:center;padding:10px 0 2px;line-height:1.25}
+  .test-question .lang{display:block;margin-bottom:6px;font-size:.72rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--on-surface-variant);opacity:.8}
+  .test-options{display:flex;flex-direction:column;gap:9px}
+  .option{position:relative;overflow:hidden;display:flex;align-items:center;gap:12px;width:100%;padding:13px 16px;border-radius:var(--r-md);border:1px solid var(--outline-variant);background:var(--surface-lowest);color:var(--on-surface);font-size:.96rem;text-align:left;transition:background .18s,border-color .18s,transform .12s}
+  .option:hover:not(:disabled){background:var(--surface-container-high);border-color:var(--outline)}
+  .option:active:not(:disabled){transform:scale(.99)}
+  .option .key{width:26px;height:26px;flex:none;border-radius:50%;display:grid;place-items:center;background:var(--surface-container-high);font-size:.72rem;font-weight:700;color:var(--on-surface-variant)}
+  .option .label{flex:1;min-width:0}
+  .option .mark{width:20px;flex:none;display:none}
+  .option.correct{background:var(--success-container);border-color:color-mix(in srgb,var(--success) 45%,transparent);color:var(--on-success-container)}
+  .option.correct .key{background:color-mix(in srgb,var(--success) 22%,transparent);color:inherit}
+  .option.correct .mark{display:block}
+  .option.wrong{background:var(--error-container);border-color:color-mix(in srgb,var(--error) 50%,transparent);color:var(--on-error-container);animation:shake .38s ease}
+  .option.wrong .key{background:color-mix(in srgb,var(--error) 20%,transparent);color:inherit}
+  .option.wrong .mark{display:block}
+  .option.dont-know{border-style:dashed;color:var(--on-surface-variant);background:transparent}
+  .option.dont-know .key{background:var(--warning-container);color:var(--on-warning-container)}
+  .option:disabled{cursor:default}
+  @keyframes shake{0%,100%{transform:none}20%{transform:translateX(-5px)}40%{transform:translateX(5px)}60%{transform:translateX(-3px)}80%{transform:translateX(3px)}}
+
+  .result{display:flex;flex-direction:column;align-items:center;gap:14px;text-align:center;padding:6px 0}
+  .result-badge{width:112px;height:112px;border-radius:50%;display:grid;place-items:center;background:conic-gradient(var(--primary) calc(var(--score,0)*1%),var(--surface-container-high) 0);position:relative;box-shadow:var(--shadow-1)}
+  .result-badge::before{content:"";position:absolute;inset:9px;border-radius:50%;background:var(--surface-container)}
+  .result-badge b{position:relative;font-size:1.9rem;font-weight:700;letter-spacing:-.02em}
+  .result-level{display:inline-flex;align-items:center;gap:8px;padding:8px 18px;border-radius:var(--r-full);background:var(--primary-container);color:var(--on-primary-container);font-weight:700;font-size:1.05rem}
+  .breakdown{width:100%;display:flex;flex-direction:column;gap:6px;margin-top:4px}
+  .bd-row{display:grid;grid-template-columns:44px 1fr auto;align-items:center;gap:10px;font-size:.8rem;color:var(--on-surface-variant)}
+  .bd-track{height:6px;border-radius:var(--r-full);background:var(--surface-container-high);overflow:hidden}
+  .bd-track i{display:block;height:100%;background:var(--primary);border-radius:inherit;transition:width .5s ease}
+  .bd-row b{color:var(--on-surface);font-size:.8rem;min-width:38px;text-align:right}
+
+  /* Difficult */
+  .toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:space-between}
+  .field{display:flex;align-items:center;gap:10px;flex:1 1 240px;min-height:52px;padding:0 16px;border-radius:var(--r-full);background:var(--surface-container-high);color:var(--on-surface-variant)}
+  .field:focus-within{outline:3px solid var(--primary);outline-offset:1px}
+  .field input{flex:1;min-width:0;border:none;background:transparent;outline:none;font-size:.94rem;color:var(--on-surface)}
+  .field input::placeholder{color:var(--on-surface-variant);opacity:.75}
+  .list{display:flex;flex-direction:column;gap:10px}
+  .word-item{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px 16px;align-items:center;padding:16px 18px;border-radius:var(--r-lg);background:var(--surface-container-low);border:1px solid var(--outline-variant);box-shadow:var(--shadow-1);animation:viewIn .25s ease}
+  .word-en{font-weight:600;font-size:1.05rem;letter-spacing:-.005em;overflow-wrap:anywhere}
+  .word-ru{color:var(--on-surface-variant);font-size:.9rem;margin-top:1px}
+  .word-meta{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:7px;font-size:.72rem;color:var(--on-surface-variant)}
+  .badge{display:inline-flex;align-items:center;gap:4px;padding:3px 9px;border-radius:var(--r-full);background:var(--primary-container);color:var(--on-primary-container);font-size:.68rem;font-weight:700;letter-spacing:.03em}
+  .badge.soft{background:var(--surface-container-high);color:var(--on-surface-variant);font-weight:500;letter-spacing:0}
+  .word-actions{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+  .icon-text{position:relative;overflow:hidden;display:inline-flex;align-items:center;gap:6px;min-height:38px;padding:0 13px;border-radius:var(--r-full);font-size:.78rem;font-weight:600;transition:background .18s,transform .12s}
+  .icon-text:active{transform:scale(.96)}
+  .icon-text .icon{width:16px;height:16px}
+  .icon-text.ok{background:var(--success-container);color:var(--on-success-container)}
+  .icon-text.del{background:var(--error-container);color:var(--on-error-container)}
+  .empty{display:flex;flex-direction:column;align-items:center;text-align:center;gap:8px;padding:44px 20px;border-radius:var(--r-xl);background:var(--surface-container);color:var(--on-surface-variant)}
+  .empty .icon{width:44px;height:44px;opacity:.55;margin-bottom:4px}
+  .empty b{color:var(--on-surface);font-size:1.02rem;font-weight:600}
+  .empty p{font-size:.85rem;max-width:380px}
+  .section-foot{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;font-size:.78rem;color:var(--on-surface-variant);padding-top:4px}
+
+  /* Footer, snackbar, dialog */
+  .app-footer{width:min(100% - 32px,880px);margin:0 auto;padding:0 0 28px;text-align:center;font-size:.72rem;color:var(--on-surface-variant);line-height:1.7}
+  .app-footer b{color:var(--on-surface);font-weight:600}
+  .snackbar{position:fixed;left:50%;bottom:24px;z-index:80;transform:translate(-50%,140%);max-width:min(92vw,520px);padding:14px 22px;border-radius:var(--r-sm);background:var(--inverse-surface);color:var(--inverse-on-surface);font-size:.88rem;box-shadow:var(--shadow-3);opacity:0;pointer-events:none;transition:transform .32s cubic-bezier(.2,.8,.2,1),opacity .32s;text-align:center}
+  .snackbar.show{transform:translate(-50%,0);opacity:1}
+  dialog{border:none;padding:0;margin:auto;border-radius:var(--r-xl);background:var(--surface-high);color:var(--on-surface);box-shadow:var(--shadow-3);width:min(92vw,420px);max-height:90vh}
+  dialog::backdrop{background:rgba(0,0,0,.42);backdrop-filter:blur(3px)}
+  .dialog-body{padding:24px;display:flex;flex-direction:column;gap:10px}
+  .dialog-body h2{font-size:1.2rem;font-weight:600}
+  .dialog-body p{font-size:.9rem;color:var(--on-surface-variant)}
+  .dialog-actions{display:flex;justify-content:flex-end;gap:8px;padding:8px 16px 16px;flex-wrap:wrap}
+
+  .ripple{position:absolute;border-radius:50%;background:currentColor;opacity:.22;transform:scale(0);animation:ripple .55s ease-out forwards;pointer-events:none}
+  @keyframes ripple{to{transform:scale(1);opacity:0}}
+
+  @media (max-width:560px){
+    .app{padding-top:14px;gap:14px}
+    .brand p{display:none}
+    .tab{flex:1 0 auto;padding:0 11px;font-size:.82rem;gap:6px}
+    .tab .icon{width:17px;height:17px}
+    .level-seg .seg-btn{min-width:0;padding:0 6px;font-size:.78rem}
+    .seg-btn small{display:none}
+    .app-footer{font-size:.7rem}
+    .flashcard{height:250px}
+    .stage{min-height:268px}
+    .btn{min-height:50px;padding:0 16px;font-size:.9rem}
+    .controls{gap:10px}
+    .btn kbd{display:none}
+    .word-item{grid-template-columns:1fr}
+    .word-actions{justify-content:flex-start}
+    .test-card{padding:18px}
+    .panel{padding:24px 16px}
+  }
+  @media (max-width:430px){
+    .tab .icon{display:none}
+    .tab{padding:0 10px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+  }
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-book" viewBox="0 0 24 24"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5V5.5ZM6.5 18H18V5H6.5a.5.5 0 0 0-.5.5v12.7c.16-.13.34-.2.5-.2Z"/></symbol>
+  <symbol id="i-repeat" viewBox="0 0 24 24"><path d="M7 7h9v2.5L20 6l-4-3.5V5H6a3 3 0 0 0-3 3v4h2V8a1 1 0 0 1 1-1Zm10 10H8v-2.5L4 18l4 3.5V19h10a3 3 0 0 0 3-3v-4h-2v4a1 1 0 0 1-1 1Z"/></symbol>
+  <symbol id="i-quiz" viewBox="0 0 24 24"><path d="M4 4h16a1 1 0 0 1 1 1v11a1 1 0 0 1-1 1H9l-5 4v-4a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1Zm4 4a1 1 0 1 0 0 2h8a1 1 0 1 0 0-2H8Zm0 4a1 1 0 1 0 0 2h5a1 1 0 1 0 0-2H8Z"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 24 24"><path d="M12 2 1 21h22L12 2Zm0 6 7.5 11h-15L12 8Zm-1 3v4h2v-4h-2Zm0 5v2h2v-2h-2Z"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 24 24"><path d="M12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10Zm0 2a3 3 0 1 1 0 6 3 3 0 0 1 0-6ZM11 1h2v3h-2V1Zm0 19h2v3h-2v-3ZM1 11h3v2H1v-2Zm19 0h3v2h-3v-2ZM3.5 2.1 6.6 5.2 5.2 6.6 2.1 3.5l1.4-1.4Zm13.9 13.9 3.1 3.1-1.4 1.4-3.1-3.1 1.4-1.4Zm1.7-13.9 1.4 1.4-3.1 3.1-1.4-1.4 3.1-3.1ZM5.2 17.4l1.4 1.4-3.1 3.1-1.4-1.4 3.1-3.1Z"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24"><path d="M12.3 2a9.9 9.9 0 1 0 9.7 11.7A8 8 0 0 1 12.3 2Zm0 2.1a7.9 7.9 0 1 1 7.3 10.3A10 10 0 0 0 12.3 4.1Z"/></symbol>
+  <symbol id="i-auto" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20V2Zm2 0v20a10 10 0 0 0 0-20Z"/></symbol>
+  <symbol id="i-volume" viewBox="0 0 24 24"><path d="M4 9v6h4l5 4V5L8 9H4Zm12.5 3a3.5 3.5 0 0 0-2-3.2v6.4a3.5 3.5 0 0 0 2-3.2Zm-2-7.7v2.1a6 6 0 0 1 0 11.2v2.1a8 8 0 0 0 0-15.4Z"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="m9 16.2-3.5-3.5L4 14.2 9 19 20 8l-1.4-1.5L9 16.2Z"/></symbol>
+  <symbol id="i-close" viewBox="0 0 24 24"><path d="m18.3 5.7-6.3 6.3-6.3-6.3-1.4 1.4 6.3 6.3-6.3 6.3 1.4 1.4 6.3-6.3 6.3 6.3 1.4-1.4-6.3-6.3 6.3-6.3-1.4-1.4Z"/></symbol>
+  <symbol id="i-left" viewBox="0 0 24 24"><path d="M20 11H7.8l5.6-5.6L12 4l-8 8 8 8 1.4-1.4L7.8 13H20v-2Z"/></symbol>
+  <symbol id="i-right" viewBox="0 0 24 24"><path d="M4 13h12.2l-5.6 5.6L12 20l8-8-8-8-1.4 1.4 5.6 5.6H4v2Z"/></symbol>
+  <symbol id="i-restart" viewBox="0 0 24 24"><path d="M12 5V2L7 6l5 4V7a5 5 0 1 1-5 5H5a7 7 0 1 0 7-7Z"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><path d="M10 3a7 7 0 1 0 4.4 12.5l4.3 4.3 1.4-1.4-4.3-4.3A7 7 0 0 0 10 3Zm0 2a5 5 0 1 1 0 10 5 5 0 0 1 0-10Z"/></symbol>
+  <symbol id="i-trash" viewBox="0 0 24 24"><path d="M7 21a2 2 0 0 1-2-2V6H4V4h5V3h6v1h5v2h-1v13a2 2 0 0 1-2 2H7Zm10-15H7v13h10V6Zm-6 2h2v9h-2V8Zm4 0h2v9h-2V8Z"/></symbol>
+  <symbol id="i-sparkle" viewBox="0 0 24 24"><path d="m12 2 2.2 6.3L20.5 10l-6.3 2.2L12 18.5l-2.2-6.3L3.5 10l6.3-1.7L12 2Zm7 12 1.1 3.2 3.2 1.1-3.2 1.1L19 22.6l-1.1-3.2-3.2-1.1 3.2-1.1L19 14Z"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7L8 5Z"/></symbol>
+  <symbol id="i-flag" viewBox="0 0 24 24"><path d="M6 3h2v18H6V3Zm3 1h11l-2.5 4L20 12H9V4Z"/></symbol>
+</svg>
+
+<header class="app-bar">
+  <div class="app-bar-inner">
+    <div class="brand">
+      <span class="brand-mark"><svg class="icon"><use href="#i-book"></use></svg></span>
+      <div>
+        <h1>Английские флеш-карточки</h1>
+        <p>Тренажёр слов · A1–C2 · интервальное повторение</p>
+      </div>
+    </div>
+    <div class="app-bar-actions">
+      <button class="icon-btn" id="themeBtn" aria-label="Сменить тему" title="Сменить тему">
+        <svg class="icon" id="themeIcon"><use href="#i-sun"></use></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main class="app">
+  <nav class="tabs" role="tablist" aria-label="Разделы">
+    <button class="tab" role="tab" id="tab-learn" data-view="learn" aria-selected="true" aria-controls="view-learn">
+      <svg class="icon"><use href="#i-book"></use></svg>Учить
+    </button>
+    <button class="tab" role="tab" id="tab-review" data-view="review" aria-selected="false" aria-controls="view-review">
+      <svg class="icon"><use href="#i-repeat"></use></svg>Повторение
+    </button>
+    <button class="tab" role="tab" id="tab-test" data-view="test" aria-selected="false" aria-controls="view-test">
+      <svg class="icon"><use href="#i-quiz"></use></svg>Тест уровня
+    </button>
+    <button class="tab" role="tab" id="tab-difficult" data-view="difficult" aria-selected="false" aria-controls="view-difficult">
+      <svg class="icon"><use href="#i-alert"></use></svg>Сложные
+    </button>
+  </nav>
+
+  <!-- LEARN -->
+  <section class="view" id="view-learn" role="tabpanel" aria-labelledby="tab-learn">
+    <div class="level-seg" id="learnLevels" role="group" aria-label="Уровень для изучения"></div>
+    <div class="stats-row">
+      <span class="chip accent"><svg class="icon"><use href="#i-check"></use></svg>Изучено <b id="learnKnown">0</b> из <b id="learnTotal">0</b></span>
+      <span class="chip">Раунд <b id="learnPos">0</b>/<b id="learnSize">0</b></span>
+      <span class="chip" id="learnDiffChip">Сложные <b id="learnDiffCount">0</b></span>
+    </div>
+    <div class="progress" role="progressbar" aria-label="Прогресс уровня" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="learnProgressEl"><i id="learnBar"></i></div>
+
+    <div class="stage" id="learnStage">
+      <div class="flashcard" id="learnCard" role="button" tabindex="0" aria-label="Карточка">
+        <div class="fc-inner">
+          <div class="face front">
+            <div class="face-tag">Слово</div>
+            <div class="word" id="learnFront">—</div>
+            <button class="speak" id="learnSpeak" aria-label="Произнести слово" title="Произнести (S)">
+              <svg class="icon"><use href="#i-volume"></use></svg>
+            </button>
+            <div class="hint">Нажмите, чтобы перевернуть · <kbd>Пробел</kbd></div>
+          </div>
+          <div class="face back">
+            <div class="face-tag">Перевод</div>
+            <div class="word" id="learnBack">—</div>
+            <div class="word-sub" id="learnBackSub"></div>
+            <div class="hint">Знаю — <kbd>→</kbd> · Не знаю — <kbd>←</kbd></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel" id="learnDone" hidden>
+      <div class="panel-icon"><svg class="icon"><use href="#i-sparkle"></use></svg></div>
+      <h2 id="learnDoneTitle">Раунд завершён!</h2>
+      <p id="learnDoneText">Отличная работа. Продолжайте, чтобы закрепить слова.</p>
+      <div class="stats-row">
+        <span class="chip good">Знаю: <b id="learnDoneKnown">0</b></span>
+        <span class="chip">Не знаю: <b id="learnDoneUnknown">0</b></span>
+      </div>
+      <div class="actions">
+        <button class="btn btn-filled btn-small" id="learnNextRound"><svg class="icon-sm"><use href="#i-play"></use></svg>Новый раунд</button>
+        <button class="btn btn-tonal btn-small" id="learnGoDiff">Сложные слова</button>
+      </div>
+    </div>
+
+    <div class="controls" id="learnControls">
+      <button class="btn btn-danger" id="learnNo"><svg class="icon-sm"><use href="#i-close"></use></svg>Не знаю</button>
+      <button class="btn btn-success" id="learnYes"><svg class="icon-sm"><use href="#i-check"></use></svg>Знаю</button>
+    </div>
+    <p class="kbd-hint"><kbd>←</kbd> не знаю · <kbd>→</kbd> знаю · <kbd>Пробел</kbd> перевернуть · <kbd>S</kbd> произнести</p>
+  </section>
+
+  <!-- REVIEW -->
+  <section class="view" id="view-review" role="tabpanel" aria-labelledby="tab-review" hidden>
+    <div class="level-seg" id="reviewLevels" role="group" aria-label="Уровень для повторения"></div>
+    <div class="stats-row">
+      <span class="chip accent"><svg class="icon"><use href="#i-check"></use></svg>Изучено <b id="reviewKnown">0</b></span>
+      <span class="chip">К повторению <b id="reviewDue">0</b></span>
+      <span class="chip">Осталось в сессии <b id="reviewLeft">0</b></span>
+    </div>
+    <div class="progress" role="progressbar" aria-label="Прогресс повторения" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="reviewProgressEl"><i id="reviewBar"></i></div>
+
+    <div class="stage" id="reviewStage">
+      <div class="flashcard" id="reviewCard" role="button" tabindex="0" aria-label="Карточка повторения">
+        <div class="fc-inner">
+          <div class="face front">
+            <div class="face-tag">Вспомните перевод</div>
+            <div class="word" id="reviewFront">—</div>
+            <button class="speak" id="reviewSpeak" aria-label="Произнести слово" title="Произнести (S)">
+              <svg class="icon"><use href="#i-volume"></use></svg>
+            </button>
+            <div class="hint">Нажмите, чтобы перевернуть · <kbd>Пробел</kbd></div>
+          </div>
+          <div class="face back">
+            <div class="face-tag">Перевод</div>
+            <div class="word" id="reviewBack">—</div>
+            <div class="word-sub" id="reviewBackSub"></div>
+            <div class="hint">Помню — <kbd>→</kbd> · Забыл — <kbd>←</kbd></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel" id="reviewDone" hidden>
+      <div class="panel-icon"><svg class="icon"><use href="#i-check"></use></svg></div>
+      <h2 id="reviewDoneTitle">Повторение завершено</h2>
+      <p id="reviewDoneText">Слова снова появятся, когда подойдёт срок повторения.</p>
+      <div class="stats-row">
+        <span class="chip good">Помню: <b id="reviewDoneKnown">0</b></span>
+        <span class="chip">Забыл: <b id="reviewDoneUnknown">0</b></span>
+      </div>
+      <div class="actions">
+        <button class="btn btn-filled btn-small" id="reviewAgain"><svg class="icon-sm"><use href="#i-repeat"></use></svg>Повторить всё</button>
+        <button class="btn btn-tonal btn-small" id="reviewLearn">Учить новые</button>
+      </div>
+    </div>
+
+    <div class="controls" id="reviewControls">
+      <button class="btn btn-danger" id="reviewForget"><svg class="icon-sm"><use href="#i-close"></use></svg>Забыл</button>
+      <button class="btn btn-success" id="reviewRemember"><svg class="icon-sm"><use href="#i-check"></use></svg>Помню</button>
+    </div>
+    <p class="kbd-hint">Интервалы повторения растут с каждым верным ответом</p>
+  </section>
+
+  <!-- TEST -->
+  <section class="view" id="view-test" role="tabpanel" aria-labelledby="tab-test" hidden>
+    <div class="test-card" id="testIntro">
+      <div class="test-head"><span>Определение уровня</span><span>20 вопросов</span></div>
+      <div class="test-question"><span class="lang">A1 · A2 · B1 · B2 · C1 · C2</span>Какой у вас уровень английского?</div>
+      <p style="text-align:center;color:var(--on-surface-variant);font-size:.9rem">
+        Вопросы распределены по всем шести уровням. Выберите перевод слова или «Я не знаю».<br>
+        Ошибки автоматически попадут в раздел «Сложные».
+      </p>
+      <p id="lastResult" class="kbd-hint" hidden></p>
+      <div class="controls" style="grid-template-columns:1fr;max-width:320px">
+        <button class="btn btn-filled" id="btnStartTest"><svg class="icon-sm"><use href="#i-play"></use></svg>Начать тест</button>
+      </div>
+    </div>
+
+    <div class="test-card" id="testQuiz" hidden>
+      <div class="test-head">
+        <span id="testCounter">Вопрос 1 / 20</span>
+        <span id="testScoreChip" class="chip good" style="padding:4px 10px;font-size:.72rem">Верно: 0</span>
+      </div>
+      <div class="progress"><i id="testBar"></i></div>
+      <div class="test-question" id="testWord"><span class="lang">Выберите перевод</span>—</div>
+      <div class="test-options" id="testOptions"></div>
+    </div>
+
+    <div class="test-card" id="testResult" hidden>
+      <div class="result">
+        <div class="result-badge" id="resultBadge"><b id="resultPct">0%</b></div>
+        <div class="result-level"><svg class="icon-sm"><use href="#i-flag"></use></svg>Ваш уровень: <span id="resultLevel">A1</span></div>
+        <p style="color:var(--on-surface-variant);font-size:.9rem" id="resultText">—</p>
+        <div class="breakdown" id="resultBreakdown"></div>
+        <div class="actions" style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:6px">
+          <button class="btn btn-filled btn-small" id="testGoLearn">Учить на этом уровне</button>
+          <button class="btn btn-tonal btn-small" id="testRestart"><svg class="icon-sm"><use href="#i-restart"></use></svg>Заново</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DIFFICULT -->
+  <section class="view" id="view-difficult" role="tabpanel" aria-labelledby="tab-difficult" hidden>
+    <div class="stats-row">
+      <span class="chip accent"><svg class="icon"><use href="#i-alert"></use></svg>В списке <b id="diffCount">0</b></span>
+      <span class="chip">Всего слов в базе <b id="diffBankCount">0</b></span>
+    </div>
+    <div class="toolbar">
+      <label class="field">
+        <svg class="icon"><use href="#i-search"></use></svg>
+        <input id="diffSearch" type="search" placeholder="Поиск по слову или переводу" aria-label="Поиск сложных слов" autocomplete="off">
+      </label>
+      <button class="btn btn-outlined btn-small" id="clearDiff"><svg class="icon-sm"><use href="#i-trash"></use></svg>Очистить</button>
+    </div>
+    <div class="list" id="diffList"></div>
+    <div class="empty" id="diffEmpty" hidden>
+      <svg class="icon"><use href="#i-sparkle"></use></svg>
+      <b id="diffEmptyTitle">Сложных слов пока нет</b>
+      <p id="diffEmptyText">Нажмите «Не знаю» на карточке или ошибитесь в тесте — слово появится здесь.</p>
+    </div>
+    <div class="section-foot">
+      <span>Слова из этого списка остаются в тренажёре, пока вы не отметите их изученными.</span>
+      <button class="btn btn-text btn-small" id="resetAll" style="color:var(--error)">Сбросить весь прогресс</button>
+    </div>
+  </section>
+</main>
+
+<footer class="app-footer">
+  <span id="footerText">Словарь загружается…</span><br>
+  Прогресс хранится локально в браузере и не передаётся никуда.
+</footer>
+
+<div class="snackbar" id="snackbar" role="status" aria-live="polite"></div>
+
+<dialog id="confirmDialog" aria-labelledby="dlgTitle">
+  <form method="dialog" class="dialog-body">
+    <h2 id="dlgTitle">Подтвердите действие</h2>
+    <p id="dlgText">—</p>
+  </form>
+  <div class="dialog-actions">
+    <button class="btn btn-text btn-small" id="dlgCancel" value="cancel">Отмена</button>
+    <button class="btn btn-filled btn-small" id="dlgOk" value="ok">Подтвердить</button>
+  </div>
+</dialog>
+
+<script>
+/* ============================================================
+   СЛОВАРНАЯ БАЗА (реальные слова, без генерации)
+   ============================================================ */
+const RAW_BANK = {
+a1: `
+apple=яблоко
+book=книга
+cat=кошка
+dog=собака
+house=дом
+water=вода
+food=еда
+friend=друг
+family=семья
+school=школа
+car=машина
+tree=дерево
+sun=солнце
+moon=луна
+star=звезда
+hand=рука
+eye=глаз
+head=голова
+foot=ступня
+door=дверь
+window=окно
+table=стол
+chair=стул
+bed=кровать
+room=комната
+city=город
+street=улица
+park=парк
+shop=магазин
+money=деньги
+time=время
+day=день
+night=ночь
+morning=утро
+evening=вечер
+year=год
+month=месяц
+week=неделя
+hour=час
+minute=минута
+red=красный
+blue=синий
+green=зелёный
+yellow=жёлтый
+black=чёрный
+white=белый
+big=большой
+small=маленький
+good=хороший
+bad=плохой
+hot=горячий
+cold=холодный
+new=новый
+old=старый
+happy=счастливый
+sad=грустный
+fast=быстрый
+slow=медленный
+eat=есть
+drink=пить
+go=идти
+come=приходить
+see=видеть
+hear=слышать
+speak=говорить
+read=читать
+write=писать
+run=бежать
+walk=гулять
+sleep=спать
+love=любить
+like=нравиться
+want=хотеть
+need=нуждаться
+help=помогать
+play=играть
+work=работать
+study=учиться
+live=жить
+open=открывать
+close=закрывать
+start=начинать
+finish=заканчивать
+buy=покупать
+sell=продавать
+mother=мама
+father=папа
+brother=брат
+sister=сестра
+son=сын
+daughter=дочь
+child=ребёнок
+man=мужчина
+woman=женщина
+boy=мальчик
+girl=девочка
+teacher=учитель
+student=студент
+doctor=врач
+driver=водитель
+bread=хлеб
+milk=молоко
+tea=чай
+coffee=кофе
+meat=мясо
+fish=рыба
+egg=яйцо
+cheese=сыр
+butter=масло
+rice=рис
+soup=суп
+salad=салат
+sugar=сахар
+salt=соль
+fruit=фрукт
+vegetable=овощ
+orange=апельсин
+banana=банан
+potato=картофель
+tomato=помидор
+breakfast=завтрак
+lunch=обед
+dinner=ужин
+plate=тарелка
+cup=чашка
+knife=нож
+fork=вилка
+spoon=ложка
+bottle=бутылка
+bag=сумка
+box=коробка
+key=ключ
+phone=телефон
+computer=компьютер
+television=телевизор
+clock=часы
+pen=ручка
+pencil=карандаш
+paper=бумага
+letter=письмо
+name=имя
+number=число
+color=цвет
+music=музыка
+film=фильм
+game=игра
+ball=мяч
+toy=игрушка
+bike=велосипед
+bus=автобус
+train=поезд
+plane=самолёт
+ship=корабль
+road=дорога
+bridge=мост
+river=река
+sea=море
+lake=озеро
+mountain=гора
+forest=лес
+flower=цветок
+grass=трава
+sky=небо
+rain=дождь
+snow=снег
+wind=ветер
+cloud=облако
+weather=погода
+summer=лето
+winter=зима
+spring=весна
+autumn=осень
+today=сегодня
+tomorrow=завтра
+yesterday=вчера
+now=сейчас
+always=всегда
+never=никогда
+often=часто
+sometimes=иногда
+very=очень
+also=тоже
+again=снова
+here=здесь
+there=там
+left=левый
+right=правый
+up=вверх
+down=вниз
+near=рядом
+far=далеко
+clean=чистый
+dirty=грязный
+easy=лёгкий
+hard=трудный
+long=длинный
+short=короткий
+strong=сильный
+weak=слабый
+young=молодой
+rich=богатый
+poor=бедный
+beautiful=красивый
+funny=смешной
+serious=серьёзный
+quiet=тихий
+loud=громкий
+full=полный
+empty=пустой
+expensive=дорогой
+cheap=дешёвый
+tall=высокий
+low=низкий
+warm=тёплый
+cool=прохладный
+dry=сухой
+wet=мокрый
+sit=сидеть
+stand=стоять
+jump=прыгать
+swim=плавать
+sing=петь
+dance=танцевать
+cook=готовить
+wash=мыть
+drive=водить
+fly=летать
+listen=слушать
+ask=спрашивать
+answer=отвечать
+give=давать
+take=брать
+put=класть
+find=находить
+make=делать
+tell=рассказывать
+think=думать
+know=знать
+understand=понимать
+remember=помнить
+forget=забывать
+try=пытаться
+call=звонить
+wait=ждать
+pay=платить
+wear=носить
+carry=нести
+meet=встречать
+smile=улыбаться
+laugh=смеяться
+cry=плакать
+`,
+a2: `
+arrive=прибывать
+leave=уходить
+return=возвращаться
+travel=путешествовать
+visit=посещать
+invite=приглашать
+accept=принимать
+refuse=отказываться
+promise=обещать
+explain=объяснять
+describe=описывать
+discuss=обсуждать
+decide=решать
+choose=выбирать
+change=менять
+prepare=готовить
+plan=планировать
+offer=предлагать
+suggest=рекомендовать
+advise=советовать
+borrow=одалживать
+lend=давать в долг
+spend=тратить
+save=экономить
+earn=зарабатывать
+cost=стоить
+fail=терпеть неудачу
+succeed=добиваться успеха
+improve=улучшать
+practice=практиковать
+repeat=повторять
+translate=переводить
+pronounce=произносить
+spell=писать по буквам
+mean=значить
+matter=иметь значение
+belong=принадлежать
+depend=зависеть
+believe=верить
+agree=соглашаться
+disagree=не соглашаться
+argue=спорить
+complain=жаловаться
+apologize=извиняться
+thank=благодарить
+worry=беспокоиться
+hope=надеяться
+wish=желать
+dream=мечтать
+enjoy=наслаждаться
+prefer=предпочитать
+hate=ненавидеть
+miss=скучать
+feel=чувствовать
+touch=трогать
+smell=пахнуть
+taste=пробовать
+look=смотреть
+watch=наблюдать
+notice=замечать
+seem=казаться
+appear=появляться
+happen=случаться
+break=ломать
+fix=чинить
+build=строить
+create=создавать
+design=проектировать
+draw=рисовать
+paint=красить
+cut=резать
+push=толкать
+pull=тянуть
+throw=бросать
+catch=ловить
+hold=держать
+drop=ронять
+lift=поднимать
+fill=наполнять
+pour=наливать
+boil=кипятить
+bake=печь
+fry=жарить
+share=делиться
+join=присоединяться
+follow=следовать
+lead=вести
+allow=разрешать
+forbid=запрещать
+warn=предупреждать
+protect=защищать
+hurt=ранить
+heal=лечить
+hide=прятать
+show=показывать
+cover=покрывать
+deliver=доставлять
+order=заказывать
+rent=арендовать
+pack=упаковывать
+move=двигать
+stay=оставаться
+enter=входить
+exit=выходить
+cross=пересекать
+turn=поворачивать
+stop=останавливать
+continue=продолжать
+begin=начинать
+end=заканчивать
+complete=завершать
+collect=собирать
+count=считать
+measure=измерять
+compare=сравнивать
+divide=делить
+add=добавлять
+remove=удалять
+check=проверять
+test=тестировать
+solve=находить решение
+guess=угадывать
+imagine=представлять
+realize=осознавать
+express=выражать
+mention=упоминать
+remind=напоминать
+advice=совет
+opinion=мнение
+idea=идея
+reason=причина
+problem=проблема
+solution=решение
+question=вопрос
+story=рассказ
+history=история
+news=новости
+message=сообщение
+email=электронная почта
+address=адрес
+ticket=билет
+passport=паспорт
+luggage=багаж
+map=карта
+trip=поездка
+holiday=праздник
+party=вечеринка
+wedding=свадьба
+birthday=день рождения
+gift=подарок
+guest=гость
+neighbour=сосед
+colleague=коллега
+boss=начальник
+job=работа
+office=офис
+company=компания
+meeting=встреча
+salary=зарплата
+contract=договор
+project=проект
+report=отчёт
+task=задача
+goal=цель
+result=результат
+success=успех
+mistake=ошибка
+experience=опыт
+skill=навык
+knowledge=знание
+language=язык
+culture=культура
+country=страна
+capital=столица
+world=мир
+nature=природа
+environment=окружающая среда
+health=здоровье
+illness=болезнь
+medicine=лекарство
+pain=боль
+accident=авария
+danger=опасность
+safety=безопасность
+rule=правило
+law=закон
+government=правительство
+society=общество
+community=сообщество
+future=будущее
+past=прошлое
+moment=момент
+event=событие
+situation=ситуация
+chance=шанс
+choice=выбор
+habit=привычка
+hobby=хобби
+exercise=упражнение
+fitness=фитнес
+diet=диета
+recipe=рецепт
+ingredient=ингредиент
+kitchen=кухня
+furniture=мебель
+floor=пол
+wall=стена
+roof=крыша
+garden=сад
+garage=гараж
+elevator=лифт
+stairs=лестница
+corner=угол
+centre=центр
+area=район
+building=здание
+factory=фабрика
+farm=ферма
+village=деревня
+beach=пляж
+island=остров
+desert=пустыня
+valley=долина
+field=поле
+hill=холм
+cave=пещера
+`,
+b1: `
+ability=способность
+achieve=достигать
+admit=признавать
+advantage=преимущество
+affect=влиять
+afford=позволить себе
+agreement=договорённость
+aim=намерение
+amount=сумма
+apply=подавать заявку
+appointment=запись на приём
+arrange=договариваться
+attitude=отношение
+attract=привлекать
+available=доступный
+average=средний
+avoid=избегать
+aware=осведомлённый
+balance=равновесие
+behave=вести себя
+benefit=польза
+blame=винить
+brief=краткий
+broad=широкий
+budget=бюджет
+cause=вызывать
+certain=определённый
+challenge=вызов
+character=характер
+charge=взимать плату
+circumstance=обстоятельство
+claim=утверждать
+comment=комментировать
+communicate=общаться
+competition=соревнование
+condition=условие
+confidence=уверенность
+confirm=подтверждать
+consider=рассматривать
+contain=содержать
+contribute=вносить вклад
+convince=убеждать
+cooperate=сотрудничать
+crowd=толпа
+deal=сделка
+debate=дебаты
+decision=решение
+decline=идти на спад
+delay=задержка
+demand=требование
+deny=отрицать
+determine=определять
+develop=развивать
+difference=разница
+difficult=трудный
+direct=прямой
+disappear=исчезать
+discover=обнаруживать
+distance=расстояние
+doubt=сомнение
+effort=усилие
+encourage=поощрять
+entire=целый
+equal=равный
+establish=устанавливать
+evidence=доказательство
+exact=точный
+except=кроме
+exchange=обменивать
+exist=существовать
+expect=ожидать
+faith=вера
+familiar=знакомый
+fault=вина
+fear=страх
+feature=особенность
+figure=цифра
+focus=сосредоточиваться
+force=сила
+forgive=прощать
+gain=приобретать
+general=общий
+grow=расти
+guarantee=гарантия
+harm=вред
+hesitate=колебаться
+hire=нанимать
+however=однако
+huge=огромный
+identify=опознавать
+ignore=игнорировать
+immediate=немедленный
+import=импортировать
+include=включать
+increase=увеличивать
+independent=независимый
+influence=влияние
+inform=информировать
+instead=вместо
+intend=намереваться
+introduce=знакомить
+invent=изобретать
+invest=инвестировать
+involve=вовлекать
+issue=вопрос
+lack=нехватка
+level=уровень
+limit=ограничивать
+local=местный
+main=главный
+manage=управлять
+method=метод
+mind=разум
+necessary=необходимый
+negative=отрицательный
+nervous=нервный
+obvious=очевидный
+occur=происходить
+opportunity=возможность
+opposite=противоположный
+organize=организовывать
+original=первоначальный
+patient=пациент
+perform=выступать
+permission=разрешение
+persuade=уговаривать
+point=точка
+possible=возможный
+practical=практичный
+predict=предсказывать
+present=настоящий
+prevent=предотвращать
+previous=предыдущий
+price=цена
+private=частный
+probably=вероятно
+process=процесс
+produce=производить
+proper=правильный
+propose=предлагать
+prove=доказывать
+provide=обеспечивать
+purpose=цель
+quality=качество
+quantity=количество
+raise=поднимать
+range=диапазон
+reach=добираться
+receive=получать
+recent=недавний
+recognize=узнавать
+reduce=сокращать
+refer=ссылаться
+regret=сожалеть
+regular=регулярный
+reject=отклонять
+relate=связывать
+relax=расслабляться
+rely=полагаться
+remain=оставаться
+repair=ремонтировать
+replace=заменять
+represent=представлять
+require=требовать
+research=исследование
+respect=уважать
+responsible=ответственный
+reveal=раскрывать
+risk=риск
+role=роль
+search=искать
+sense=чувство
+separate=отдельный
+service=услуга
+similar=похожий
+simple=простой
+soon=скоро
+source=источник
+special=особый
+spread=распространять
+standard=стандарт
+state=состояние
+step=шаг
+strange=странный
+stress=стресс
+strict=строгий
+subject=предмет
+sudden=внезапный
+support=поддерживать
+suppose=предполагать
+sure=уверенный
+surprise=удивление
+survive=выживать
+system=система
+tend=иметь тенденцию
+therefore=поэтому
+though=хотя
+thought=мысль
+threat=угроза
+total=итоговый
+trouble=неприятность
+trust=доверять
+truth=правда
+typical=типичный
+unless=если не
+valuable=ценный
+various=различный
+waste=тратить впустую
+whether=ли
+whole=весь
+wide=обширный
+win=побеждать
+wonder=интересоваться
+worth=стоящий
+`,
+b2: `
+abandon=покидать
+absolute=абсолютный
+abstract=абстрактный
+abundant=обильный
+accelerate=ускорять
+access=доступ
+accommodate=размещать
+accompany=сопровождать
+accomplish=выполнять
+accumulate=накапливать
+accurate=безошибочный
+accuse=обвинять
+acknowledge=признавать
+acquire=приобретать
+adapt=приспосабливать
+adequate=адекватный
+adjust=настраивать
+admire=восхищаться
+adopt=перенимать
+advocate=сторонник
+aggressive=агрессивный
+allege=голословно утверждать
+alleviate=облегчать
+allocate=распределять
+alter=изменять
+alternative=альтернатива
+ambiguous=двусмысленный
+amend=вносить поправки
+analyse=анализировать
+annual=ежегодный
+anticipate=предвидеть
+anxious=тревожный
+apparent=кажущийся
+appeal=призыв
+appreciate=ценить
+approach=подход
+appropriate=подходящий
+approve=одобрять
+arbitrary=произвольный
+articulate=чётко выражать
+assemble=монтировать
+assess=давать оценку
+asset=актив
+assign=поручать
+assist=содействовать
+assume=предполагать
+assure=заверять
+attach=прикреплять
+attain=достигать
+attempt=попытка
+authority=власть
+autonomy=автономия
+avert=предотвращать
+barrier=барьер
+basis=основа
+bias=предвзятость
+boost=повышать
+boundary=граница
+breakthrough=прорыв
+burden=бремя
+campaign=кампания
+capable=способный
+capacity=вместимость
+cease=прекращать
+cite=цитировать
+civilian=гражданский
+clarify=уточнять
+coherent=связный
+coincide=совпадать
+collaborate=сотрудничать
+collapse=обрушиваться
+commence=начинать
+commit=совершать
+commodity=товар
+compel=принуждать
+compensate=компенсировать
+competent=компетентный
+complement=дополнять
+comply=соблюдать
+component=компонент
+comprehensive=всеобъемлющий
+comprise=включать в себя
+conceal=скрывать
+concede=уступать
+conceive=представлять себе
+conclude=заключать
+condemn=осуждать
+conduct=проводить
+confine=ограничивать
+conform=подчиняться
+consequence=последствие
+considerable=существенный
+consist=состоять
+constitute=образовывать
+constraint=ограничение
+consume=потреблять
+contemporary=современный
+contradict=противоречить
+controversy=спор
+convey=передавать смысл
+cope=справляться
+core=суть
+corporate=корпоративный
+correspond=соответствовать
+crucial=решающий
+cumulative=накопленный
+currency=валюта
+declare=объявлять
+dedicate=посвящать
+deficit=дефицит
+definite=определённый
+demonstrate=демонстрировать
+denote=обозначать
+depict=изображать
+deprive=лишать
+derive=происходить
+detect=выявлять
+deteriorate=ухудшаться
+devote=уделять
+diminish=уменьшать
+distinct=отчётливый
+distinguish=различать
+distort=искажать
+diverse=разнообразный
+domestic=внутренний
+dominate=доминировать
+draft=черновик
+dramatic=резкий
+duration=длительность
+dynamic=динамичный
+elaborate=подробно объяснять
+eliminate=устранять
+emerge=возникать
+emphasis=акцент
+empirical=эмпирический
+enable=позволять
+enhance=улучшать
+enormous=громадный
+ensure=гарантировать
+entail=влечь за собой
+equity=справедливость
+essential=основной
+evaluate=анализировать
+evident=очевидный
+evolve=развиваться
+exceed=превышать
+exclude=исключать
+exhibit=выставлять
+expand=расширять
+explicit=явный
+exploit=эксплуатировать
+extract=извлекать
+facilitate=способствовать
+feasible=осуществимый
+fluctuate=колебаться
+fundamental=основополагающий
+generate=генерировать
+genuine=подлинный
+grant=предоставлять
+hence=следовательно
+hierarchy=иерархия
+highlight=выделять
+hypothesis=гипотеза
+illustrate=иллюстрировать
+implement=внедрять
+imply=подразумевать
+incentive=стимул
+inclined=склонный
+incorporate=включать
+indicate=указывать
+inevitable=неизбежный
+infer=выводить
+inherent=неотъемлемый
+initiate=инициировать
+innovative=инновационный
+insight=понимание
+integrate=интегрировать
+integrity=целостность
+intense=интенсивный
+interpret=толковать
+intervene=вмешиваться
+justify=оправдывать
+legitimate=законный
+maintain=поддерживать
+mandatory=обязательный
+manipulate=манипулировать
+marginal=незначительный
+mutual=взаимный
+nevertheless=тем не менее
+notion=понятие
+numerous=многочисленный
+objective=объективный
+obtain=получать
+occupy=занимать
+offset=возмещать
+ongoing=продолжающийся
+outcome=исход
+overall=в целом
+parameter=параметр
+perceive=воспринимать
+permanent=постоянный
+persist=сохраняться
+perspective=точка зрения
+phase=фаза
+phenomenon=явление
+policy=политика
+potential=потенциал
+precise=точный
+preliminary=предварительный
+presume=предполагать
+prevail=преобладать
+priority=приоритет
+profound=глубокий
+prohibit=запрещать
+prominent=выдающийся
+prospect=перспектива
+pursue=преследовать
+radical=радикальный
+ratio=соотношение
+rational=рациональный
+recover=восстанавливаться
+refine=совершенствовать
+regulate=регулировать
+reinforce=укреплять
+relevant=уместный
+reluctant=неохотный
+retain=удерживать
+revenue=доход
+rigid=жёсткий
+scope=масштаб
+sequence=последовательность
+significant=значимый
+simultaneously=одновременно
+sophisticated=сложный
+stable=стабильный
+statistics=статистика
+strategy=стратегия
+submit=подавать
+subsequent=последующий
+substitute=замена
+sufficient=достаточный
+sustain=обеспечивать
+temporary=временный
+terminate=завершать
+thereby=тем самым
+transmit=передавать сигнал
+trend=тенденция
+ultimate=окончательный
+undergo=претерпевать
+undertake=предпринимать
+uniform=единообразный
+utilize=использовать
+valid=действительный
+vary=варьироваться
+vehicle=транспортное средство
+verify=проверять
+via=через
+violate=нарушать
+virtual=виртуальный
+visible=видимый
+whereas=тогда как
+widespread=широко распространённый
+yield=давать результат
+`,
+c1: `
+abrupt=внезапный
+absurd=абсурдный
+acute=острый
+adamant=непреклонный
+adhere=придерживаться
+adverse=неблагоприятный
+aesthetic=эстетический
+affinity=влечение
+affirm=подтверждать
+agile=проворный
+alienate=отчуждать
+aloof=отстранённый
+altruistic=альтруистичный
+ambivalent=двойственный
+ameliorate=улучшать
+anomaly=аномалия
+apathy=апатия
+apprehensive=обеспокоенный
+arduous=тяжёлый
+ascertain=выяснять
+aspire=стремиться
+astute=проницательный
+audacity=дерзость
+augment=приумножать
+auspicious=благоприятный
+austere=суровый
+avarice=алчность
+benevolent=благожелательный
+bolster=укреплять
+brevity=краткость
+candid=откровенный
+capricious=капризный
+castigate=сурово критиковать
+caustic=едкий
+censure=порицать
+circumspect=осмотрительный
+clandestine=тайный
+coerce=принуждать
+cogent=убедительный
+commend=хвалить
+compelling=захватывающий
+complacent=самодовольный
+conciliatory=примирительный
+condone=потворствовать
+conducive=способствующий
+congenial=приятный
+conjecture=догадка
+conspicuous=заметный
+contempt=презрение
+contentious=спорный
+conventional=обычный
+convoluted=запутанный
+credible=заслуживающий доверия
+culminate=достигать кульминации
+cursory=поверхностный
+daunting=устрашающий
+decisive=решающий
+deference=почтение
+defy=бросать вызов
+deliberate=намеренный
+demean=унижать
+deplete=истощать
+deplore=осуждать
+desolate=пустынный
+deter=удерживать
+detrimental=вредный
+devious=коварный
+diligent=прилежный
+discrepancy=расхождение
+disdain=пренебрежение
+disparity=неравенство
+disperse=рассеивать
+dissuade=отговаривать
+divulge=разглашать
+dogmatic=догматический
+dubious=сомнительный
+elicit=вызывать
+eloquent=красноречивый
+elusive=неуловимый
+embellish=приукрашивать
+empathy=сопереживание
+encompass=охватывать
+endeavour=стараться
+enigma=загадка
+entice=соблазнять
+enumerate=перечислять
+ephemeral=мимолётный
+eradicate=искоренять
+evade=уклоняться
+exacerbate=обострять
+exemplary=образцовый
+exhaustive=исчерпывающий
+exonerate=оправдывать
+expedite=ускорять
+extol=превозносить
+extraneous=посторонний
+facetious=шутливый
+fallacy=заблуждение
+fervent=пылкий
+fickle=непостоянный
+flourish=процветать
+forbearance=терпение
+fortify=укреплять
+fraught=чреватый
+frugal=бережливый
+futile=тщетный
+galvanize=побуждать
+grievance=обида
+hinder=препятствовать
+hostile=враждебный
+hypocrisy=лицемерие
+imminent=неминуемый
+impartial=беспристрастный
+impede=затруднять
+imperative=настоятельный
+impetus=импульс
+implicit=неявный
+impose=навязывать
+inadvertent=непреднамеренный
+incessant=непрерывный
+indifferent=равнодушный
+indigenous=коренной
+induce=побуждать
+inept=неумелый
+inertia=инерция
+ingenious=изобретательный
+inhibit=подавлять
+innate=врождённый
+innocuous=безвредный
+insatiable=ненасытный
+insolent=дерзкий
+intricate=замысловатый
+intrinsic=внутренне присущий
+jeopardize=ставить под угрозу
+lament=оплакивать
+latent=скрытый
+lucrative=прибыльный
+malleable=податливый
+meticulous=скрупулёзный
+mitigate=смягчать
+morose=угрюмый
+mundane=обыденный
+nominal=номинальный
+notorious=печально известный
+novice=новичок
+nuance=нюанс
+obscure=неясный
+obsolete=устаревший
+obstinate=упрямый
+ominous=зловещий
+onerous=обременительный
+opaque=непрозрачный
+ostensible=мнимый
+painstaking=кропотливый
+paradox=парадокс
+paramount=первостепенный
+perpetual=вечный
+pervasive=повсеместный
+plausible=правдоподобный
+poignant=трогательный
+pragmatic=практичный
+precarious=шаткий
+precedent=прецедент
+proficient=опытный
+prolific=плодовитый
+propensity=склонность
+proximity=близость
+prudent=благоразумный
+quandary=затруднительное положение
+rampant=необузданный
+rebuke=упрекать
+reconcile=примирять
+redundant=избыточный
+refute=опровергать
+relentless=неустанный
+relinquish=отказываться от
+remnant=остаток
+render=делать
+resilient=устойчивый
+resolute=твёрдый
+reticent=сдержанный
+revere=почитать
+robust=крепкий
+rudimentary=элементарный
+salient=заметный
+sanction=санкция
+scrupulous=добросовестный
+scrutiny=тщательная проверка
+sedentary=сидячий
+sporadic=спорадический
+stagnant=застойный
+staunch=стойкий
+subtle=тонкий
+succinct=краткий
+superfluous=излишний
+surmount=преодолевать
+susceptible=восприимчивый
+tangible=осязаемый
+tedious=утомительный
+tenacious=цепкий
+transient=преходящий
+trivial=тривиальный
+unanimous=единодушный
+unprecedented=беспрецедентный
+uphold=поддерживать
+vehement=яростный
+venerable=почтенный
+versatile=универсальный
+viable=жизнеспособный
+vicarious=опосредованный
+vigorous=энергичный
+vindicate=оправдывать
+volatile=нестабильный
+voracious=прожорливый
+warrant=обосновывать
+wary=осторожный
+whimsical=причудливый
+zealous=рьяный
+`,
+c2: `
+abstruse=малопонятный
+abysmal=ужасающий
+accolade=награда
+acerbic=язвительный
+acquiesce=безропотно соглашаться
+acrimonious=озлобленный
+admonish=наставлять
+adroit=ловкий
+adulation=раболепная лесть
+affable=приветливый
+aggrandize=превозносить
+alacrity=живость
+amalgamate=объединять
+amenable=сговорчивый
+amorphous=бесформенный
+anachronism=анахронизм
+anathema=проклятие
+animus=враждебность
+antipathy=неприязнь
+aphorism=афоризм
+aplomb=самообладание
+apocryphal=сомнительный
+apotheosis=апофеоз
+apposite=уместный
+apprise=уведомлять
+approbation=одобрение
+arcane=тайный
+archaic=архаичный
+argot=жаргон
+ascetic=аскетический
+ascribe=приписывать
+assiduous=старательный
+attenuate=ослаблять
+audacious=дерзкий
+avow=открыто признавать
+axiom=аксиома
+belligerent=воинственный
+beneficent=благодетельный
+bequeath=завещать
+berate=бранить
+bereft=лишённый
+bombastic=напыщенный
+bourgeois=мещанский
+brusque=бесцеремонный
+bucolic=пасторальный
+burgeon=разрастаться
+cacophony=какофония
+cajole=улещивать
+callous=бессердечный
+candor=прямота
+capitulate=капитулировать
+catharsis=катарсис
+chagrin=огорчение
+charlatan=шарлатан
+chicanery=крючкотворство
+clamor=гвалт
+cloying=приторный
+coalesce=сливаться
+coda=завершение
+cognizant=осведомлённый
+commensurate=соразмерный
+commodious=просторный
+comportment=поведение
+conundrum=головоломка
+debacle=крах
+decorous=благопристойный
+demagogue=демагог
+denouement=развязка
+deprecate=неодобрительно относиться
+deride=высмеивать
+desultory=бессистемный
+diaphanous=прозрачный
+didactic=назидательный
+diffident=застенчивый
+dilatory=медлительный
+disabuse=выводить из заблуждения
+discordant=диссонирующий
+disingenuous=неискренний
+disparage=принижать
+dissemble=скрывать истинные чувства
+dissonance=разлад
+dour=мрачный
+ebullient=кипучий
+eclectic=эклектичный
+edify=наставлять
+effusive=экспансивный
+egregious=вопиющий
+elegy=элегия
+elucidate=разъяснять
+emaciated=истощённый
+emollient=смягчающий
+encomium=панегирик
+endemic=эндемический
+enervate=обессиливать
+ennui=скука
+epitome=воплощение
+equanimity=невозмутимость
+equivocate=увиливать
+erudite=эрудированный
+esoteric=эзотерический
+eulogy=хвалебная речь
+euphoria=эйфория
+exacting=требовательный
+exhort=настоятельно призывать
+exigent=неотложный
+exorbitant=чрезмерный
+expunge=вычёркивать
+extricate=выпутывать
+exuberant=жизнерадостный
+fallacious=ошибочный
+fastidious=привередливый
+fatuous=глуповатый
+feckless=беспечный
+felicitous=удачный
+fidelity=верность
+flabbergasted=ошеломлённый
+flippant=легкомысленный
+flout=пренебрегать
+foible=слабость
+foment=разжигать
+forlorn=безутешный
+fortuitous=случайный
+fractious=сварливый
+fulminate=гневно обличать
+furtive=украдкой
+garrulous=болтливый
+glut=избыток
+grandiloquent=высокопарный
+gregarious=общительный
+guile=хитрость
+hackneyed=избитый
+halcyon=безмятежный
+hapless=незадачливый
+harbinger=предвестник
+hedonist=гедонист
+hegemony=гегемония
+heterogeneous=разнородный
+hiatus=перерыв
+homogeneous=однородный
+iconoclast=ниспровергатель
+idiosyncrasy=характерная особенность
+ignominious=позорный
+illustrious=прославленный
+imbue=проникать
+immutable=неизменный
+impasse=тупик
+impeccable=безупречный
+impecunious=неимущий
+imperious=властный
+imperturbable=невозмутимый
+impervious=непроницаемый
+implacable=непримиримый
+importune=настойчиво просить
+impromptu=экспромтом
+impudent=нахальный
+inchoate=начальный
+incongruous=несообразный
+incontrovertible=неопровержимый
+indefatigable=неутомимый
+indigent=нуждающийся
+indolent=ленивый
+ineffable=невыразимый
+ingenuous=простодушный
+innuendo=намёк
+insouciant=беззаботный
+inundate=наводнять
+invective=брань
+inveterate=закоренелый
+irascible=вспыльчивый
+itinerant=странствующий
+jettison=выбрасывать
+jubilant=ликующий
+judicious=рассудительный
+juxtapose=сопоставлять
+laconic=немногословный
+languid=вялый
+largess=щедрость
+lassitude=усталость
+lax=небрежный
+levity=легкомыслие
+licentious=распутный
+lithe=гибкий
+loquacious=словоохотливый
+magnanimous=великодушный
+malevolent=злонамеренный
+maudlin=сентиментальный
+maverick=бунтарь
+mellifluous=сладкозвучный
+mercurial=переменчивый
+misanthrope=мизантроп
+modicum=небольшое количество
+mollify=успокаивать
+moribund=умирающий
+munificent=щедрый
+myriad=бесчисленный
+nadir=низшая точка
+nascent=зарождающийся
+nefarious=гнусный
+neophyte=неофит
+nonchalant=невозмутимый
+noxious=ядовитый
+obfuscate=запутывать
+obsequious=подобострастный
+obstreperous=буйный
+obtuse=тупоумный
+officious=назойливый
+opulent=роскошный
+ostentatious=показной
+panacea=панацея
+panegyric=панегирик
+paradigm=парадигма
+pariah=изгой
+parsimonious=скупой
+partisan=сторонник
+paucity=недостаток
+pecuniary=денежный
+pellucid=кристально ясный
+penchant=склонность
+penurious=бедный
+perfidious=вероломный
+perfunctory=формальный
+pernicious=пагубный
+perspicacious=проницательный
+pertinacious=упорный
+petulant=раздражительный
+philanthropic=благотворительный
+phlegmatic=флегматичный
+pinnacle=вершина
+pious=благочестивый
+placate=умиротворять
+platitude=банальность
+plethora=изобилие
+polemic=полемика
+precept=заповедь
+precipitate=стремительный
+preclude=исключать
+precocious=не по годам развитый
+predilection=пристрастие
+preeminent=выдающийся
+prepossessing=располагающий
+prescient=прозорливый
+prevaricate=уклоняться от истины
+prodigious=огромный
+profligate=расточительный
+profuse=обильный
+progeny=потомство
+promulgate=обнародовать
+propitious=благоприятный
+prosaic=прозаичный
+protean=изменчивый
+puerile=ребячливый
+pugnacious=драчливый
+punctilious=педантичный
+pundit=эксперт
+quagmire=трясина
+quell=подавлять
+querulous=ворчливый
+quiescent=неподвижный
+quixotic=донкихотский
+rancor=злоба
+rapacious=жадный
+recalcitrant=непокорный
+recant=отрекаться
+reciprocate=отвечать взаимностью
+reclusive=затворнический
+redoubtable=грозный
+refractory=своенравный
+relegate=низводить
+remiss=нерадивый
+repudiate=отвергать
+rescind=отменять
+rife=распространённый
+sagacious=мудрый
+sanguine=оптимистичный
+sardonic=саркастический
+scathing=уничижительный
+schadenfreude=злорадство
+sedulous=усердный
+serendipity=счастливая случайность
+servile=раболепный
+sinister=зловещий
+solicitous=заботливый
+solipsistic=солипсический
+somber=мрачный
+soporific=усыпляющий
+spurious=поддельный
+squalid=убогий
+squander=растрачивать
+staid=степенный
+stentorian=громогласный
+stigma=клеймо
+stolid=невозмутимый
+strident=резкий
+stupendous=изумительный
+suave=обходительный
+subjugate=покорять
+sublime=возвышенный
+subterfuge=уловка
+sycophant=подхалим
+taciturn=неразговорчивый
+tantamount=равносильный
+tawdry=безвкусный
+tempestuous=бурный
+tenuous=шаткий
+tepid=прохладный
+terse=немногословный
+timorous=робкий
+tirade=гневная речь
+torpid=оцепенелый
+tortuous=извилистый
+tractable=послушный
+trepidation=трепет
+truculent=свирепый
+turbid=мутный
+ubiquitous=вездесущий
+unctuous=елейный
+undulate=волнообразно двигаться
+unfeigned=неподдельный
+untenable=несостоятельный
+usurp=узурпировать
+vacillate=колеблющийся
+vapid=пресный
+venal=продажный
+venerate=благоговеть
+veracity=правдивость
+verbose=многословный
+verisimilitude=правдоподобие
+vestige=след
+vex=смущать
+vicissitude=превратность
+vilify=поносить
+vindictive=мстительный
+virtuoso=виртуоз
+virulent=злобный
+vociferous=крикливый
+voluble=говорливый
+wane=убывать
+wanton=безрассудный
+wheedle=выманивать
+wistful=задумчивый
+zealot=фанатик
+zenith=зенит
+`
+};
+
+const LEVELS = ["A1","A2","B1","B2","C1","C2"];
+const LEVEL_META = {
+  A1:{name:"Beginner"}, A2:{name:"Elementary"}, B1:{name:"Intermediate"},
+  B2:{name:"Upper-Int"}, C1:{name:"Advanced"}, C2:{name:"Proficiency"}
+};
+
+function parseBank(raw){
+  const seen = new Set();
+  const out = [];
+  raw.split("\n").forEach(line => {
+    line = line.trim();
+    if (!line) return;
+    const i = line.indexOf("=");
+    if (i < 1) return;
+    const en = line.slice(0, i).trim();
+    const ru = line.slice(i + 1).trim();
+    const key = en.toLowerCase();
+    if (!en || !ru || seen.has(key)) return;
+    seen.add(key);
+    out.push([en, ru]);
+  });
+  return out;
+}
+
+const BANKS = {};
+LEVELS.forEach(lv => { BANKS[lv] = parseBank(RAW_BANK[lv.toLowerCase()]); });
+const TOTAL_WORDS = LEVELS.reduce((n, lv) => n + BANKS[lv].length, 0);
+const BANK_KEYS = new Set(
+  LEVELS.flatMap(lv => BANKS[lv].map(([w]) => lv + ":" + w.toLowerCase()))
+);
+/* ============================================================
+   СОСТОЯНИЕ И ХРАНИЛИЩЕ
+   ============================================================ */
+const STORAGE_KEY = "flashcards_md3_v3";
+const LEGACY_KEY = "flashcards_md3_progress_v2";
+const DAY = 86400000;
+const ROUND_SIZE = 20;
+const SRS_DAYS = [0, 1, 3, 7, 16, 35, 75];
+
+function defaultState(){
+  return { version: 3, known: {}, difficult: {}, currentLevel: "A1", theme: "auto", testHistory: [] };
+}
+
+function normalizeKnown(raw){
+  const out = {};
+  Object.entries(raw && typeof raw === "object" ? raw : {}).forEach(([key, val]) => {
+    if (val === true) out[key] = { box: 1, due: Date.now() };
+    else if (val && typeof val === "object") {
+      out[key] = {
+        box: Number.isFinite(val.box) ? Math.max(0, Math.min(6, val.box)) : 1,
+        due: Number.isFinite(val.due) ? val.due : Date.now()
+      };
+    }
+  });
+  return out;
+}
+
+function loadState(){
+  const base = defaultState();
+  for (const key of [STORAGE_KEY, LEGACY_KEY]) {
+    try {
+      const raw = localStorage.getItem(key);
+      if (!raw) continue;
+      const saved = JSON.parse(raw);
+      if (!saved || typeof saved !== "object") continue;
+      const merged = {
+        ...base,
+        ...saved,
+        known: normalizeKnown(saved.known),
+        difficult: saved.difficult && typeof saved.difficult === "object" ? saved.difficult : {},
+        testHistory: Array.isArray(saved.testHistory) ? saved.testHistory : []
+      };
+      if (!LEVELS.includes(merged.currentLevel)) merged.currentLevel = "A1";
+      if (!["auto", "light", "dark"].includes(merged.theme)) merged.theme = "auto";
+      // Отбрасываем записи, которых больше нет в словаре (в т.ч. из старой версии)
+      Object.keys(merged.known).forEach(k => { if (!BANK_KEYS.has(k)) delete merged.known[k]; });
+      Object.keys(merged.difficult).forEach(k => { if (!BANK_KEYS.has(k)) delete merged.difficult[k]; });
+      return merged;
+    } catch (err) { console.warn("Не удалось прочитать прогресс", err); }
+  }
+  return base;
+}
+
+let state = loadState();
+
+function save(){
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }
+  catch (err) { console.warn("Не удалось сохранить прогресс", err); }
+}
+
+/* ============================================================
+   ХЕЛПЕРЫ
+   ============================================================ */
+const $ = (sel, root = document) => root.querySelector(sel);
+const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
+const keyOf = (level, word) => level + ":" + word.toLowerCase();
+
+function shuffle(list){
+  for (let i = list.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [list[i], list[j]] = [list[j], list[i]];
+  }
+  return list;
+}
+
+function sample(list, n){
+  return shuffle(list.slice()).slice(0, n);
+}
+
+function icon(name, cls = "icon"){
+  return `<svg class="${cls}" aria-hidden="true"><use href="#i-${name}"></use></svg>`;
+}
+
+let snackTimer = null;
+function toast(message){
+  const el = $("#snackbar");
+  el.textContent = message;
+  el.classList.add("show");
+  clearTimeout(snackTimer);
+  snackTimer = setTimeout(() => el.classList.remove("show"), 2400);
+}
+
+function speak(text){
+  if (!("speechSynthesis" in window)) { toast("Озвучивание не поддерживается браузером"); return; }
+  try {
+    window.speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(text);
+    u.lang = "en-US";
+    u.rate = 0.9;
+    window.speechSynthesis.speak(u);
+  } catch (err) { console.warn(err); }
+}
+
+/* ============================================================
+   СЛОВАРИ И ПРОГРЕСС
+   ============================================================ */
+function isKnown(level, word){
+  return Object.prototype.hasOwnProperty.call(state.known, keyOf(level, word));
+}
+
+function knownCount(level){
+  return BANKS[level].reduce((n, [w]) => n + (isKnown(level, w) ? 1 : 0), 0);
+}
+
+function dueCount(level){
+  const now = Date.now();
+  return BANKS[level].reduce((n, [w]) => {
+    const rec = state.known[keyOf(level, w)];
+    return n + (rec && rec.due <= now ? 1 : 0);
+  }, 0);
+}
+
+function markKnown(level, word, box){
+  const key = keyOf(level, word);
+  const b = Math.max(0, Math.min(6, box));
+  state.known[key] = { box: b, due: Date.now() + SRS_DAYS[b] * DAY };
+  save();
+}
+
+function addDifficult(level, word, translation, source){
+  const key = keyOf(level, word);
+  const existed = key in state.difficult;
+  state.difficult[key] = {
+    level, word, translation, source: source || "Карточки",
+    ts: Date.now()
+  };
+  save();
+  return !existed;
+}
+
+function removeDifficult(level, word){
+  delete state.difficult[keyOf(level, word)];
+  save();
+}
+
+function difficultItems(){
+  return Object.values(state.difficult).sort((a, b) => (b.ts || 0) - (a.ts || 0));
+}
+
+/* ============================================================
+   ТЕМА
+   ============================================================ */
+const systemTheme = window.matchMedia("(prefers-color-scheme: dark)");
+function resolvedTheme(){
+  if (state.theme === "auto") return systemTheme.matches ? "dark" : "light";
+  return state.theme;
+}
+function applyTheme(){
+  document.documentElement.dataset.theme = resolvedTheme();
+  const iconUse = $("#themeIcon use");
+  const name = state.theme === "auto" ? "auto" : state.theme === "light" ? "sun" : "moon";
+  if (iconUse) iconUse.setAttribute("href", "#i-" + name);
+  const btn = $("#themeBtn");
+  btn.title = "Тема: " + (state.theme === "auto" ? "как в системе" : state.theme === "light" ? "светлая" : "тёмная");
+  btn.setAttribute("aria-label", btn.title + ". Нажмите, чтобы сменить");
+}
+systemTheme.addEventListener("change", () => { if (state.theme === "auto") applyTheme(); });
+
+/* ============================================================
+   ВКЛАДКИ
+   ============================================================ */
+let currentView = "learn";
+const views = ["learn", "review", "test", "difficult"];
+
+function setView(name){
+  currentView = name;
+  $$(".tab").forEach(tab => {
+    const active = tab.dataset.view === name;
+    tab.setAttribute("aria-selected", String(active));
+    tab.tabIndex = active ? 0 : -1;
+  });
+  views.forEach(v => { $("#view-" + v).hidden = v !== name; });
+  if (name === "learn") renderLearn();
+  if (name === "review") renderReview();
+  if (name === "test") renderTestIntro();
+  if (name === "difficult") renderDifficult();
+}
+
+$$(".tab").forEach(tab => {
+  tab.addEventListener("click", () => setView(tab.dataset.view));
+});
+
+function setLevel(level){
+  if (!LEVELS.includes(level)) return;
+  state.currentLevel = level;
+  save();
+  if (currentView === "learn") startLearnRound();
+  else if (currentView === "review") startReview(false);
+  renderLearnSegments();
+  renderReviewSegments();
+}
+
+function renderLevelSegments(container, handler){
+  container.innerHTML = "";
+  LEVELS.forEach(lv => {
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "seg-btn ripple-host";
+    btn.setAttribute("aria-pressed", String(lv === state.currentLevel));
+    btn.innerHTML = `<span>${lv}</span><small>${LEVEL_META[lv].name}</small>`;
+    btn.addEventListener("click", () => handler(lv));
+    container.appendChild(btn);
+  });
+}
+function renderLearnSegments(){ renderLevelSegments($("#learnLevels"), setLevel); }
+function renderReviewSegments(){ renderLevelSegments($("#reviewLevels"), setLevel); }
+
+/* ============================================================
+   УЧИТЬ
+   ============================================================ */
+const learn = { level: null, queue: [], index: 0, phase: "active", roundKnown: 0, roundUnknown: 0, renderedKey: null, busy: false, roundId: 0 };
+
+function startLearnRound(){
+  const level = state.currentLevel;
+  learn.roundId++;
+  learn.level = level;
+  learn.queue = sample(BANKS[level].filter(([w]) => !isKnown(level, w)), ROUND_SIZE);
+  learn.index = 0;
+  learn.roundKnown = 0;
+  learn.roundUnknown = 0;
+  learn.busy = false;
+  learn.renderedKey = null;
+  learn.phase = learn.queue.length ? "active" : "empty";
+  paintLearn(true);
+}
+
+function renderLearn(){
+  renderLearnSegments();
+  if (learn.level !== state.currentLevel) { startLearnRound(); return; }
+  paintLearn(false);
+}
+
+function paintLearn(animate){
+  const level = learn.level || state.currentLevel;
+  const total = BANKS[level].length;
+  const known = knownCount(level);
+  const diffTotal = Object.keys(state.difficult).length;
+
+  $("#learnKnown").textContent = known;
+  $("#learnTotal").textContent = total;
+  $("#learnDiffCount").textContent = diffTotal;
+  $("#learnPos").textContent = learn.phase === "active" ? Math.min(learn.index + 1, learn.queue.length) : learn.queue.length;
+  $("#learnSize").textContent = learn.queue.length;
+  const pct = total ? Math.round((known / total) * 100) : 0;
+  $("#learnBar").style.width = pct + "%";
+  $("#learnProgressEl").setAttribute("aria-valuenow", String(pct));
+
+  const done = $("#learnDone");
+  const stage = $("#learnStage");
+  const controls = $("#learnControls");
+  const panel = $("#learnDoneTitle");
+
+  if (learn.phase === "active") {
+    stage.hidden = false;
+    controls.hidden = false;
+    done.hidden = true;
+    const pair = learn.queue[learn.index];
+    if (!pair) { learn.phase = "done"; paintLearn(animate); return; }
+    const [en, ru] = pair;
+    const card = $("#learnCard");
+    const cardKey = level + ":" + en;
+    if (animate || learn.renderedKey !== cardKey) {
+      card.classList.remove("is-flipped");
+      $("#learnFront").textContent = en;
+      $("#learnBack").textContent = ru;
+      $("#learnBackSub").textContent = en;
+      card.setAttribute("aria-label", en + ". Нажмите, чтобы перевернуть карточку");
+      learn.renderedKey = cardKey;
+      card.classList.remove("enter");
+      void card.offsetWidth;
+      card.classList.add("enter");
+    }
+    return;
+  }
+
+  stage.hidden = true;
+  controls.hidden = true;
+  done.hidden = false;
+  $("#learnNextRound").disabled = learn.phase === "empty";
+  if (learn.phase === "empty") {
+    panel.textContent = "Уровень " + level + " изучен";
+    $("#learnDoneText").textContent = "Все слова этого уровня отмечены как изученные. Перейдите в повторение или выберите уровень выше.";
+    $("#learnDoneKnown").textContent = known;
+    $("#learnDoneUnknown").textContent = 0;
+  } else {
+    panel.textContent = "Раунд завершён!";
+    $("#learnDoneText").textContent = learn.roundUnknown
+      ? "Слова, которые вы не знали, добавлены в «Сложные» — они вернутся в следующем раунде."
+      : "Отличная работа: все карточки раунда отмечены как знакомые.";
+    $("#learnDoneKnown").textContent = learn.roundKnown;
+    $("#learnDoneUnknown").textContent = learn.roundUnknown;
+  }
+}
+
+function answerLearn(know){
+  if (learn.phase !== "active" || learn.busy) return;
+  const pair = learn.queue[learn.index];
+  if (!pair) return;
+  const [en, ru] = pair;
+  const level = learn.level;
+
+  if (know) {
+    markKnown(level, en, 0);
+    removeDifficult(level, en);
+    learn.roundKnown++;
+  } else {
+    addDifficult(level, en, ru, "Карточки");
+    learn.roundUnknown++;
+  }
+
+  learn.busy = true;
+  const roundId = learn.roundId;
+  const card = $("#learnCard");
+  card.classList.add("leaving");
+  setTimeout(() => {
+    if (roundId !== learn.roundId) return;
+    card.classList.remove("leaving");
+    learn.index++;
+    if (learn.index >= learn.queue.length) learn.phase = "done";
+    learn.renderedKey = null;
+    learn.busy = false;
+    paintLearn(true);
+  }, 170);
+}
+
+function flipCard(cardId){
+  const card = $("#" + cardId);
+  card.classList.toggle("is-flipped");
+}
+
+$("#learnCard").addEventListener("click", () => flipCard("learnCard"));
+$("#learnCard").addEventListener("keydown", e => {
+  if (e.key === " " || e.key === "Enter") { e.preventDefault(); flipCard("learnCard"); }
+});
+$("#learnSpeak").addEventListener("click", e => {
+  e.stopPropagation();
+  const pair = learn.queue[learn.index];
+  if (pair) speak(pair[0]);
+});
+$("#learnYes").addEventListener("click", () => answerLearn(true));
+$("#learnNo").addEventListener("click", () => answerLearn(false));
+$("#learnNextRound").addEventListener("click", () => startLearnRound());
+$("#learnGoDiff").addEventListener("click", () => setView("difficult"));
+
+/* ============================================================
+   ПОВТОРЕНИЕ
+   ============================================================ */
+const review = { level: null, queue: [], index: 0, phase: "active", roundKnown: 0, roundUnknown: 0, renderedKey: null, busy: false, roundId: 0 };
+
+function startReview(all){
+  const level = state.currentLevel;
+  const now = Date.now();
+  const due = BANKS[level].filter(([w]) => {
+    const rec = state.known[keyOf(level, w)];
+    return rec && (all || rec.due <= now);
+  });
+  review.roundId++;
+  review.level = level;
+  review.queue = sample(due, ROUND_SIZE);
+  review.index = 0;
+  review.roundKnown = 0;
+  review.roundUnknown = 0;
+  review.busy = false;
+  review.renderedKey = null;
+  review.phase = review.queue.length ? "active" : (all ? "empty-all" : "empty");
+  paintReview(true);
+}
+
+function renderReview(){
+  renderReviewSegments();
+  if (review.level !== state.currentLevel) { startReview(false); return; }
+  paintReview(false);
+}
+
+function paintReview(animate){
+  const level = review.level || state.currentLevel;
+  const known = knownCount(level);
+  const due = dueCount(level);
+  const left = Math.max(0, review.queue.length - review.index);
+
+  $("#reviewKnown").textContent = known;
+  $("#reviewDue").textContent = due;
+  $("#reviewLeft").textContent = review.phase === "active" ? left : 0;
+  const pct = review.queue.length ? Math.round((review.index / review.queue.length) * 100) : 0;
+  $("#reviewBar").style.width = pct + "%";
+  $("#reviewProgressEl").setAttribute("aria-valuenow", String(pct));
+
+  const stage = $("#reviewStage");
+  const controls = $("#reviewControls");
+  const done = $("#reviewDone");
+
+  if (review.phase === "active") {
+    stage.hidden = false;
+    controls.hidden = false;
+    done.hidden = true;
+    const pair = review.queue[review.index];
+    if (!pair) { review.phase = "done"; paintReview(animate); return; }
+    const [en, ru] = pair;
+    const card = $("#reviewCard");
+    const cardKey = level + ":" + en;
+    if (animate || review.renderedKey !== cardKey) {
+      card.classList.remove("is-flipped");
+      $("#reviewFront").textContent = en;
+      $("#reviewBack").textContent = ru;
+      $("#reviewBackSub").textContent = en;
+      card.setAttribute("aria-label", en + ". Нажмите, чтобы перевернуть карточку");
+      review.renderedKey = cardKey;
+      card.classList.remove("enter");
+      void card.offsetWidth;
+      card.classList.add("enter");
+    }
+    return;
+  }
+
+  stage.hidden = true;
+  controls.hidden = true;
+  done.hidden = false;
+  const noWords = review.phase === "empty" || review.phase === "empty-all";
+  $("#reviewDoneTitle").textContent = noWords ? "Сейчас нечего повторять" : "Повторение завершено";
+  $("#reviewDoneText").textContent = noWords
+    ? "Для этого уровня нет слов, подходящих по расписанию. Можно повторить все изученные слова вручную."
+    : "Интервалы повторения обновлены. Слова вернутся, когда подойдёт срок.";
+  $("#reviewDoneKnown").textContent = noWords ? 0 : review.roundKnown;
+  $("#reviewDoneUnknown").textContent = noWords ? 0 : review.roundUnknown;
+  $("#reviewAgain").disabled = known === 0;
+}
+
+function answerReview(remember){
+  if (review.phase !== "active" || review.busy) return;
+  const pair = review.queue[review.index];
+  if (!pair) return;
+  const [en, ru] = pair;
+  const level = review.level;
+  const key = keyOf(level, en);
+  const rec = state.known[key] || { box: 0, due: Date.now() };
+
+  if (remember) {
+    rec.box = Math.min(6, (Number.isFinite(rec.box) ? rec.box : 0) + 1);
+    rec.due = Date.now() + SRS_DAYS[rec.box] * DAY;
+    removeDifficult(level, en);
+    review.roundKnown++;
+  } else {
+    rec.box = 0;
+    rec.due = Date.now() + SRS_DAYS[0] * DAY;
+    addDifficult(level, en, ru, "Повторение");
+    review.roundUnknown++;
+  }
+  state.known[key] = rec;
+  save();
+
+  review.busy = true;
+  const roundId = review.roundId;
+  const card = $("#reviewCard");
+  card.classList.add("leaving");
+  setTimeout(() => {
+    if (roundId !== review.roundId) return;
+    card.classList.remove("leaving");
+    review.index++;
+    if (review.index >= review.queue.length) review.phase = "done";
+    review.renderedKey = null;
+    review.busy = false;
+    paintReview(true);
+  }, 170);
+}
+
+$("#reviewCard").addEventListener("click", () => flipCard("reviewCard"));
+$("#reviewCard").addEventListener("keydown", e => {
+  if (e.key === " " || e.key === "Enter") { e.preventDefault(); flipCard("reviewCard"); }
+});
+$("#reviewSpeak").addEventListener("click", e => {
+  e.stopPropagation();
+  const pair = review.queue[review.index];
+  if (pair) speak(pair[0]);
+});
+$("#reviewRemember").addEventListener("click", () => answerReview(true));
+$("#reviewForget").addEventListener("click", () => answerReview(false));
+$("#reviewAgain").addEventListener("click", () => startReview(true));
+$("#reviewLearn").addEventListener("click", () => { learn.level = null; setView("learn"); });
+
+/* ============================================================
+   ТЕСТ УРОВНЯ
+   ============================================================ */
+const TEST_LENGTH = 20;
+const TEST_PLAN = { A1: 4, A2: 4, B1: 3, B2: 3, C1: 3, C2: 3 };
+const test = { questions: [], index: 0, correct: 0, answered: false, timer: null, resultLevel: "A1", byLevel: {} };
+
+function buildOptions(level, correct, word){
+  const pool = BANKS[level].filter(([en, ru]) => en !== word && ru !== correct);
+  const unique = [];
+  const seen = new Set([correct]);
+  for (const [, ru] of sample(pool, pool.length)) {
+    if (seen.has(ru)) continue;
+    seen.add(ru);
+    unique.push(ru);
+    if (unique.length === 3) break;
+  }
+  return sample([correct, ...unique], unique.length + 1);
+}
+
+function buildTestQuestions(){
+  const questions = [];
+  LEVELS.forEach(level => {
+    const n = TEST_PLAN[level];
+    sample(BANKS[level], n).forEach(([word, correct]) => {
+      questions.push({ level, word, correct, options: buildOptions(level, correct, word) });
+    });
+  });
+  return sample(questions, TEST_LENGTH);
+}
+
+function clearTestTimer(){
+  if (test.timer) { clearTimeout(test.timer); test.timer = null; }
+}
+
+function renderTestIntro(){
+  $("#testQuiz").hidden = true;
+  $("#testResult").hidden = true;
+  $("#testIntro").hidden = false;
+  const history = state.testHistory;
+  const last = history[history.length - 1];
+  const el = $("#lastResult");
+  if (last && Number.isFinite(last.score)) {
+    el.hidden = false;
+    el.textContent = `Прошлый результат: ${last.level} · ${last.score} из ${TEST_LENGTH}`;
+  } else {
+    el.hidden = true;
+  }
+}
+
+function startTest(){
+  clearTestTimer();
+  test.questions = buildTestQuestions();
+  test.index = 0;
+  test.correct = 0;
+  test.answered = false;
+  test.byLevel = {};
+  test.questions.forEach(q => {
+    test.byLevel[q.level] = test.byLevel[q.level] || { total: 0, correct: 0 };
+    test.byLevel[q.level].total++;
+  });
+  $("#testIntro").hidden = true;
+  $("#testResult").hidden = true;
+  $("#testQuiz").hidden = false;
+  renderTestQuestion();
+}
+
+function renderTestQuestion(){
+  if (test.index >= test.questions.length) { showTestResult(); return; }
+  const q = test.questions[test.index];
+  test.answered = false;
+
+  $("#testCounter").textContent = `Вопрос ${test.index + 1} / ${test.questions.length}`;
+  $("#testScoreChip").textContent = "Верно: " + test.correct;
+  $("#testBar").style.width = Math.round((test.index / test.questions.length) * 100) + "%";
+  $("#testWord").innerHTML = `<span class="lang">${q.level} · выберите перевод</span><span>${q.word}</span>`;
+
+  const box = $("#testOptions");
+  box.innerHTML = "";
+  const letters = ["A", "B", "C", "D"];
+
+  q.options.forEach((option, i) => {
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "option ripple-host";
+    btn.dataset.value = option;
+
+    const key = document.createElement("span");
+    key.className = "key";
+    key.textContent = letters[i] || String(i + 1);
+
+    const label = document.createElement("span");
+    label.className = "label";
+    label.textContent = option;
+
+    const mark = document.createElement("span");
+    mark.className = "mark";
+
+    btn.append(key, label, mark);
+    btn.addEventListener("click", () => answerTest(option, q, btn));
+    box.appendChild(btn);
+  });
+
+  const skip = document.createElement("button");
+  skip.type = "button";
+  skip.className = "option dont-know ripple-host";
+  const key = document.createElement("span");
+  key.className = "key";
+  key.textContent = "?";
+  const label = document.createElement("span");
+  label.className = "label";
+  label.textContent = "Я не знаю";
+  const mark = document.createElement("span");
+  mark.className = "mark";
+  skip.append(key, label, mark);
+  skip.addEventListener("click", () => answerTest(null, q, skip));
+  box.appendChild(skip);
+}
+
+function answerTest(selected, q, btn){
+  if (test.answered) return;
+  test.answered = true;
+
+  const options = $$(".option", $("#testOptions"));
+  options.forEach(option => {
+    option.disabled = true;
+    if (option.dataset.value === q.correct) {
+      option.classList.add("correct");
+      const mark = $(".mark", option);
+      if (mark) mark.innerHTML = icon("check", "icon-sm");
+    }
+  });
+
+  if (selected === null) {
+    addDifficult(q.level, q.word, q.correct, "Тест");
+  } else if (selected === q.correct) {
+    test.correct++;
+    if (test.byLevel[q.level]) test.byLevel[q.level].correct++;
+  } else {
+    addDifficult(q.level, q.word, q.correct, "Тест");
+    if (btn) {
+      btn.classList.add("wrong");
+      const mark = $(".mark", btn);
+      if (mark) mark.innerHTML = icon("close", "icon-sm");
+    }
+  }
+  $("#testScoreChip").textContent = "Верно: " + test.correct;
+
+  clearTestTimer();
+  test.timer = setTimeout(() => {
+    test.index++;
+    renderTestQuestion();
+  }, 1200);
+}
+
+function showTestResult(){
+  clearTestTimer();
+  $("#testQuiz").hidden = true;
+  $("#testResult").hidden = false;
+
+  const total = test.questions.length || TEST_LENGTH;
+  const pct = Math.round((test.correct / total) * 100);
+  let level = "A1";
+  if (pct >= 95) level = "C2";
+  else if (pct >= 85) level = "C1";
+  else if (pct >= 70) level = "B2";
+  else if (pct >= 55) level = "B1";
+  else if (pct >= 35) level = "A2";
+  test.resultLevel = level;
+
+  $("#resultPct").textContent = pct + "%";
+  $("#resultBadge").style.setProperty("--score", String(pct));
+  $("#resultLevel").textContent = level + " · " + LEVEL_META[level].name;
+  $("#resultText").textContent = `Правильных ответов: ${test.correct} из ${total}. Уровень для тренировки: ${level}.`;
+
+  const breakdown = $("#resultBreakdown");
+  breakdown.innerHTML = "";
+  LEVELS.forEach(lv => {
+    const stats = test.byLevel[lv] || { total: 0, correct: 0 };
+    const row = document.createElement("div");
+    row.className = "bd-row";
+    const name = document.createElement("span");
+    name.textContent = lv;
+    const track = document.createElement("span");
+    track.className = "bd-track";
+    const fill = document.createElement("i");
+    const share = stats.total ? Math.round((stats.correct / stats.total) * 100) : 0;
+    fill.style.width = share + "%";
+    track.appendChild(fill);
+    const value = document.createElement("b");
+    value.textContent = stats.total ? stats.correct + "/" + stats.total : "—";
+    value.title = stats.total ? share + "%" : "";
+    row.append(name, track, value);
+    breakdown.appendChild(row);
+  });
+
+  state.currentLevel = level;
+  state.testHistory.push({ date: Date.now(), score: test.correct, level });
+  state.testHistory = state.testHistory.slice(-20);
+  save();
+
+  $("#testBar").style.width = "100%";
+  learn.level = null;
+  review.level = null;
+  toast("Уровень обновлён: " + level);
+}
+
+$("#btnStartTest").addEventListener("click", startTest);
+$("#testRestart").addEventListener("click", startTest);
+$("#testGoLearn").addEventListener("click", () => {
+  state.currentLevel = test.resultLevel;
+  save();
+  learn.level = null;
+  review.level = null;
+  setView("learn");
+  toast("Тренировка на уровне " + test.resultLevel);
+});
+
+/* ============================================================
+   СЛОЖНЫЕ СЛОВА
+   ============================================================ */
+let diffQuery = "";
+
+function renderDifficult(){
+  const items = difficultItems();
+  const filtered = diffQuery
+    ? items.filter(item => (item.word + " " + item.translation).toLowerCase().includes(diffQuery))
+    : items;
+
+  $("#diffCount").textContent = items.length;
+  $("#diffBankCount").textContent = TOTAL_WORDS;
+  $("#clearDiff").disabled = items.length === 0;
+
+  const list = $("#diffList");
+  const empty = $("#diffEmpty");
+  list.innerHTML = "";
+
+  if (!filtered.length) {
+    empty.hidden = false;
+    if (items.length && diffQuery) {
+      $("#diffEmptyTitle").textContent = "Ничего не найдено";
+      $("#diffEmptyText").textContent = "Попробуйте другой запрос или очистите поиск.";
+    } else {
+      $("#diffEmptyTitle").textContent = "Сложных слов пока нет";
+      $("#diffEmptyText").textContent = "Нажмите «Не знаю» на карточке или ошибитесь в тесте — слово появится здесь.";
+    }
+    return;
+  }
+  empty.hidden = true;
+
+  filtered.forEach(item => {
+    const row = document.createElement("article");
+    row.className = "word-item";
+
+    const main = document.createElement("div");
+    const en = document.createElement("div");
+    en.className = "word-en";
+    en.textContent = item.word;
+    const ru = document.createElement("div");
+    ru.className = "word-ru";
+    ru.textContent = item.translation;
+    const meta = document.createElement("div");
+    meta.className = "word-meta";
+
+    const lv = document.createElement("span");
+    lv.className = "badge";
+    lv.textContent = item.level;
+    const src = document.createElement("span");
+    src.className = "badge soft";
+    src.textContent = item.source || "Карточки";
+    const date = document.createElement("span");
+    date.textContent = item.ts ? new Date(item.ts).toLocaleDateString("ru-RU") : "";
+    meta.append(lv, src, date);
+    main.append(en, ru, meta);
+
+    const actions = document.createElement("div");
+    actions.className = "word-actions";
+
+    const know = document.createElement("button");
+    know.type = "button";
+    know.className = "icon-text ok ripple-host";
+    know.innerHTML = icon("check", "icon-sm") + "<span>Изучил</span>";
+    know.addEventListener("click", () => {
+      markKnown(item.level, item.word, 0);
+      removeDifficult(item.level, item.word);
+      renderDifficult();
+      toast("Слово отмечено изученным");
+    });
+
+    const del = document.createElement("button");
+    del.type = "button";
+    del.className = "icon-text del ripple-host";
+    del.innerHTML = icon("close", "icon-sm") + "<span>Убрать</span>";
+    del.addEventListener("click", () => {
+      removeDifficult(item.level, item.word);
+      renderDifficult();
+    });
+
+    actions.append(know, del);
+    row.append(main, actions);
+    list.appendChild(row);
+  });
+}
+
+$("#diffSearch").addEventListener("input", e => {
+  diffQuery = e.target.value.trim().toLowerCase();
+  renderDifficult();
+});
+
+/* ============================================================
+   ДИАЛОГ ПОДТВЕРЖДЕНИЯ
+   ============================================================ */
+const dialog = $("#confirmDialog");
+let dialogResolve = null;
+
+function confirmDialog({ title, text, ok, danger }){
+  return new Promise(resolve => {
+    dialogResolve = resolve;
+    $("#dlgTitle").textContent = title;
+    $("#dlgText").textContent = text;
+    const okBtn = $("#dlgOk");
+    okBtn.textContent = ok || "Подтвердить";
+    okBtn.className = "btn btn-small " + (danger ? "btn-danger" : "btn-filled");
+    dialog.returnValue = "";
+    dialog.showModal();
+  });
+}
+
+dialog.addEventListener("close", () => {
+  const resolve = dialogResolve;
+  dialogResolve = null;
+  if (resolve) resolve(dialog.returnValue === "ok");
+});
+
+$("#dlgOk").addEventListener("click", () => dialog.close("ok"));
+$("#dlgCancel").addEventListener("click", () => dialog.close("cancel"));
+
+$("#clearDiff").addEventListener("click", async () => {
+  if (!Object.keys(state.difficult).length) return;
+  const ok = await confirmDialog({
+    title: "Очистить сложные слова?",
+    text: "Список сложных слов будет очищен. Изученные слова и прогресс останутся на месте.",
+    ok: "Очистить", danger: true
+  });
+  if (!ok) return;
+  state.difficult = {};
+  save();
+  renderDifficult();
+  toast("Список сложных слов очищен");
+});
+
+$("#resetAll").addEventListener("click", async () => {
+  const ok = await confirmDialog({
+    title: "Сбросить весь прогресс?",
+    text: "Будут удалены изученные слова, сложные слова и история тестов. Это действие нельзя отменить.",
+    ok: "Сбросить", danger: true
+  });
+  if (!ok) return;
+  const theme = state.theme;
+  state = defaultState();
+  state.theme = theme;
+  save();
+  learn.level = null;
+  review.level = null;
+  renderLearnSegments();
+  renderReviewSegments();
+  renderDifficult();
+  toast("Прогресс сброшен");
+});
+
+/* ============================================================
+   КЛАВИАТУРА, РИППЛ, ИНИЦИАЛИЗАЦИЯ
+   ============================================================ */
+document.addEventListener("keydown", e => {
+  if (e.ctrlKey || e.metaKey || e.altKey) return;
+  const tag = (e.target.tagName || "").toLowerCase();
+  if (tag === "input" || tag === "textarea" || tag === "select") return;
+  const onButton = !!(e.target.closest && e.target.closest("button"));
+
+  if (currentView === "learn" && learn.phase === "active") {
+    if (e.key === "ArrowLeft" || e.key === "1") { e.preventDefault(); answerLearn(false); }
+    else if (e.key === "ArrowRight" || e.key === "2") { e.preventDefault(); answerLearn(true); }
+    else if (e.key === " " && !onButton) { e.preventDefault(); flipCard("learnCard"); }
+    else if (e.key.toLowerCase() === "s") {
+      const pair = learn.queue[learn.index];
+      if (pair) speak(pair[0]);
+    }
+  } else if (currentView === "review" && review.phase === "active") {
+    if (e.key === "ArrowLeft" || e.key === "1") { e.preventDefault(); answerReview(false); }
+    else if (e.key === "ArrowRight" || e.key === "2") { e.preventDefault(); answerReview(true); }
+    else if (e.key === " " && !onButton) { e.preventDefault(); flipCard("reviewCard"); }
+    else if (e.key.toLowerCase() === "s") {
+      const pair = review.queue[review.index];
+      if (pair) speak(pair[0]);
+    }
+  } else if (currentView === "test" && !$("#testQuiz").hidden) {
+    if (/^[1-4]$/.test(e.key)) {
+      const buttons = $$(".option:not(.dont-know)", $("#testOptions"));
+      const btn = buttons[Number(e.key) - 1];
+      if (btn && !btn.disabled) btn.click();
+    } else if (e.key === "0") {
+      const skip = $(".option.dont-know", $("#testOptions"));
+      if (skip && !skip.disabled) skip.click();
+    }
+  }
+});
+
+document.addEventListener("pointerdown", e => {
+  const host = e.target.closest && e.target.closest(".ripple-host");
+  if (!host) return;
+  const rect = host.getBoundingClientRect();
+  const size = Math.max(rect.width, rect.height) * 2;
+  const span = document.createElement("span");
+  span.className = "ripple";
+  span.style.width = span.style.height = size + "px";
+  span.style.left = (e.clientX - rect.left - size / 2) + "px";
+  span.style.top = (e.clientY - rect.top - size / 2) + "px";
+  host.appendChild(span);
+  span.addEventListener("animationend", () => span.remove());
+});
+
+$("#themeBtn").addEventListener("click", () => {
+  state.theme = state.theme === "auto" ? "light" : state.theme === "light" ? "dark" : "auto";
+  save();
+  applyTheme();
+  toast("Тема: " + (state.theme === "auto" ? "как в системе" : state.theme === "light" ? "светлая" : "тёмная"));
+});
+
+function renderFooter(){
+  const parts = LEVELS.map(lv => `${lv}: ${BANKS[lv].length}`).join(" · ");
+  $("#footerText").innerHTML = `В базе <b>${TOTAL_WORDS}</b> слов · ${parts}`;
+}
+
+window.addEventListener("beforeunload", save);
+document.addEventListener("visibilitychange", () => { if (document.hidden) save(); });
+
+$$(".btn, .tab, .icon-btn, .seg-btn").forEach(el => el.classList.add("ripple-host"));
+
+applyTheme();
+renderFooter();
+setView("learn");
+</script>
+</body>
+</html>
